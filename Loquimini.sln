@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.API", "Loquimini.API\Loquimini.API.csproj", "{79987AFE-900A-4818-82E2-C6AF1451C8DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.LoquiminiContext", "Loquimini.LoquiminiContext\Loquimini.LoquiminiContext.csproj", "{125048FC-B417-4299-8649-3CC580A29A3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Model", "Loquimini.Model\Loquimini.Model.csproj", "{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Common", "Loquimini.Common\Loquimini.Common.csproj", "{DC029972-2BBC-49E1-AA91-9DD105CE28FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79987AFE-900A-4818-82E2-C6AF1451C8DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79987AFE-900A-4818-82E2-C6AF1451C8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79987AFE-900A-4818-82E2-C6AF1451C8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79987AFE-900A-4818-82E2-C6AF1451C8DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{125048FC-B417-4299-8649-3CC580A29A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{125048FC-B417-4299-8649-3CC580A29A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{125048FC-B417-4299-8649-3CC580A29A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{125048FC-B417-4299-8649-3CC580A29A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC029972-2BBC-49E1-AA91-9DD105CE28FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC029972-2BBC-49E1-AA91-9DD105CE28FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC029972-2BBC-49E1-AA91-9DD105CE28FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC029972-2BBC-49E1-AA91-9DD105CE28FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5899C8CD-107F-4ED4-A7D9-D0576388E243}
+	EndGlobalSection
+EndGlobal
