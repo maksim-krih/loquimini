@@ -1,12 +1,12 @@
 ﻿using Loquimini.Common.EntityFrameworkTypeConfigurator;
-using Loquimini.LoquiminiContext.MapConfigs;
-using Loquimini.Model.Enteties;
+using Loquimini.Data.MapConfigs;
+using Loquimini.Model.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace Loquimini.LoquiminiContext
+namespace Loquimini.Data
 {
     public class LoquiminiDbContext : IdentityDbContext<User, Role, Guid, IdentityUserClaim<Guid>,
         UserRole, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>

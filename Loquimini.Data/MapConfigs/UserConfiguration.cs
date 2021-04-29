@@ -1,8 +1,8 @@
 ﻿using Loquimini.Common.EntityFrameworkTypeConfigurator;
-using Loquimini.Model.Enteties;
+using Loquimini.Model.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Loquimini.LoquiminiContext.MapConfigs
+namespace Loquimini.Data.MapConfigs
 {
     public class UserConfiguration : EntityTypeConfiguration<User>
     {

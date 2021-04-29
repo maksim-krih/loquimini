@@ -3,13 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.API", "Loquimini.API\Loquimini.API.csproj", "{79987AFE-900A-4818-82E2-C6AF1451C8DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquimini.API", "Loquimini.API\Loquimini.API.csproj", "{79987AFE-900A-4818-82E2-C6AF1451C8DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.LoquiminiContext", "Loquimini.LoquiminiContext\Loquimini.LoquiminiContext.csproj", "{125048FC-B417-4299-8649-3CC580A29A3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquimini.Model", "Loquimini.Model\Loquimini.Model.csproj", "{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Model", "Loquimini.Model\Loquimini.Model.csproj", "{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquimini.Common", "Loquimini.Common\Loquimini.Common.csproj", "{DC029972-2BBC-49E1-AA91-9DD105CE28FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Common", "Loquimini.Common\Loquimini.Common.csproj", "{DC029972-2BBC-49E1-AA91-9DD105CE28FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Manager", "Loquimini.Manager\Loquimini.Manager.csproj", "{CF53D481-8823-4CA8-9F56-B6402942B65E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.ModelDTO", "Loquimini.ModelDTO\Loquimini.ModelDTO.csproj", "{832E0EEE-4C61-465A-8211-E68F2F28FBBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Service", "Loquimini.Service\Loquimini.Service.csproj", "{741D2DF1-C63A-4C6C-8961-86F7672777A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Repository", "Loquimini.Repository\Loquimini.Repository.csproj", "{C0544ACE-5483-4B10-8EAE-14FECCC5471D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Mapping", "Loquimini.Mapping\Loquimini.Mapping.csproj", "{E1E99B60-3DEC-4CA9-9FA4-7EF73EDE40E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquimini.Data", "Loquimini.Data\Loquimini.Data.csproj", "{1D63BCE8-B098-4D1E-9F49-BAB923957F3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +31,6 @@ Global
 		{79987AFE-900A-4818-82E2-C6AF1451C8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79987AFE-900A-4818-82E2-C6AF1451C8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79987AFE-900A-4818-82E2-C6AF1451C8DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{125048FC-B417-4299-8649-3CC580A29A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{125048FC-B417-4299-8649-3CC580A29A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{125048FC-B417-4299-8649-3CC580A29A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{125048FC-B417-4299-8649-3CC580A29A3D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9E285B4-08EB-4D8B-8C0E-51E3ACCD0881}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +39,30 @@ Global
 		{DC029972-2BBC-49E1-AA91-9DD105CE28FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC029972-2BBC-49E1-AA91-9DD105CE28FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC029972-2BBC-49E1-AA91-9DD105CE28FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF53D481-8823-4CA8-9F56-B6402942B65E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF53D481-8823-4CA8-9F56-B6402942B65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF53D481-8823-4CA8-9F56-B6402942B65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF53D481-8823-4CA8-9F56-B6402942B65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832E0EEE-4C61-465A-8211-E68F2F28FBBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832E0EEE-4C61-465A-8211-E68F2F28FBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832E0EEE-4C61-465A-8211-E68F2F28FBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832E0EEE-4C61-465A-8211-E68F2F28FBBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741D2DF1-C63A-4C6C-8961-86F7672777A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741D2DF1-C63A-4C6C-8961-86F7672777A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741D2DF1-C63A-4C6C-8961-86F7672777A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741D2DF1-C63A-4C6C-8961-86F7672777A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0544ACE-5483-4B10-8EAE-14FECCC5471D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0544ACE-5483-4B10-8EAE-14FECCC5471D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0544ACE-5483-4B10-8EAE-14FECCC5471D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0544ACE-5483-4B10-8EAE-14FECCC5471D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E99B60-3DEC-4CA9-9FA4-7EF73EDE40E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E99B60-3DEC-4CA9-9FA4-7EF73EDE40E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E99B60-3DEC-4CA9-9FA4-7EF73EDE40E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E99B60-3DEC-4CA9-9FA4-7EF73EDE40E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D63BCE8-B098-4D1E-9F49-BAB923957F3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D63BCE8-B098-4D1E-9F49-BAB923957F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D63BCE8-B098-4D1E-9F49-BAB923957F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D63BCE8-B098-4D1E-9F49-BAB923957F3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

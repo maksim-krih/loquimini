@@ -1,8 +1,7 @@
-﻿using Loquimini.LoquiminiContext;
-using Loquimini.Model.Enteties;
+﻿using Loquimini.DI;
+using Loquimini.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,12 +19,11 @@ namespace Loquimini.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<LoquiminiDbContext>();
+            services.RegisterServices(Configuration);
+            
+            MapperInstaller.Initialize();
 
-            services.AddScoped<DbContext, LoquiminiDbContext>();
-            services.AddDbContext<LoquiminiDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            MapperInstaller.Register(services);
 
             services.AddControllers();
         }
