@@ -14,13 +14,24 @@ namespace Loquimini.API
         {
             Configuration = configuration;
         }
-
+        
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterServices(Configuration);
-            
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             MapperInstaller.Initialize();
 
             MapperInstaller.Register(services);
@@ -38,6 +49,8 @@ namespace Loquimini.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
             app.UseAuthentication();

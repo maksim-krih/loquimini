@@ -1,14 +1,15 @@
 import axios from "axios";
 import AuthApi from "./auth";
 
-const backendUrl = "http://localhost:3000";
+const backendUrl = "https://localhost:44320/api";
 
 export const BaseApi = axios.create({
   baseURL: backendUrl,
   headers: {
-    "Access-Control-Allow-Headers": "*",
     "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true",
     "Access-Control-Allow-Methods": "*",
+    "Access-Control-Allow-Headers": "*"
   },
 });
 

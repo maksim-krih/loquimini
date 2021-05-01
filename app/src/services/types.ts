@@ -13,6 +13,7 @@ export interface Role {
 
 export interface IAccount {
   user: User;
+  token: string;
 }
 
 export interface IError {

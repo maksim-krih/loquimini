@@ -1,2 +1,2 @@
-export const login = "/users/login";
-export const users = "/users"
+export const Login = "/Authorization/Login";
+export const Users = "/users"

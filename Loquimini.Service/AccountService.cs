@@ -52,8 +52,11 @@ namespace Loquimini.Service
         public async Task<User> UpdateUserAsync(User user, IEnumerable<string> roles)
         {
             var result = await _userManager.UpdateAsync(user);
+
             if (!result.Succeeded)
+            {
                 throw new Exception(result.Errors.FirstOrDefault().Description);
+            }
 
 
             if (roles != null)
@@ -66,15 +69,21 @@ namespace Loquimini.Service
                 if (rolesToRemove.Any())
                 {
                     result = await _userManager.RemoveFromRolesAsync(user, rolesToRemove);
+
                     if (!result.Succeeded)
+                    {
                         throw new Exception(result.Errors.FirstOrDefault().Description);
+                    }
                 }
 
                 if (rolesToAdd.Any())
                 {
                     result = await _userManager.AddToRolesAsync(user, rolesToAdd);
+
                     if (!result.Succeeded)
+                    {
                         throw new Exception(result.Errors.FirstOrDefault().Description);
+                    }
                 }
             }
 
@@ -84,9 +93,13 @@ namespace Loquimini.Service
         public async Task<User> ResetPasswordAsync(User user, string newPassword)
         {
             string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            
             var result = await _userManager.ResetPasswordAsync(user, resetToken, newPassword);
+            
             if (!result.Succeeded)
+            {
                 throw new Exception(result.Errors.FirstOrDefault().Description);
+            }
 
             return user;
         }
@@ -94,8 +107,11 @@ namespace Loquimini.Service
         public async Task<User> UpdatePasswordAsync(User user, string currentPassword, string newPassword)
         {
             var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            
             if (!result.Succeeded)
+            {
                 throw new Exception(result.Errors.FirstOrDefault().Description);
+            }
 
             user = _databaseManager.UserRepository.GetById(user.Id);
 
@@ -110,8 +126,10 @@ namespace Loquimini.Service
 				{
 					await _userManager.AccessFailedAsync(user);
 				}
-				return false;
+			
+                return false;
 			}
+
 			return true;
         }
 
@@ -120,7 +138,9 @@ namespace Loquimini.Service
             var user = await _userManager.FindByIdAsync(id.ToString());
 
             if (user != null)
+            {
                 return await DeleteUserAsync(user);
+            }
 
             return user;
         }
@@ -128,10 +148,12 @@ namespace Loquimini.Service
         public async Task<User> DeleteUserAsync(User user)
         {
             var result = await _userManager.DeleteAsync(user);
+
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.FirstOrDefault().Description);
             }
+            
             return user;
         }
 
@@ -148,11 +170,16 @@ namespace Loquimini.Service
         public async Task<Role> CreateRoleAsync(Role role, IEnumerable<string> claims)
         {
             if (claims == null)
+            {
                 claims = new string[] { };
+            }
 
             var result = await _roleManager.CreateAsync(role);
+
             if (!result.Succeeded)
+            {
                 throw new Exception(result.Errors.Select(e => e.Description).First());
+            }
 
 
             role = await _roleManager.FindByNameAsync(role.Name);
@@ -174,7 +201,9 @@ namespace Loquimini.Service
             var role = await _roleManager.FindByNameAsync(roleName);
 
             if (role != null)
+            {
                 return await DeleteRoleAsync(role);
+            }
 
             return role;
         }
@@ -182,8 +211,11 @@ namespace Loquimini.Service
         public async Task<Role> DeleteRoleAsync(Role role)
         {
             var result = await _roleManager.DeleteAsync(role);
+
             if (!result.Succeeded)
+            {
                 throw new Exception(result.Errors.Select(e => e.Description).First());
+            }
 
             return role;
         }
@@ -191,8 +223,11 @@ namespace Loquimini.Service
         public async Task<User> CreateUserAsync(User user, IEnumerable<string> roles, string password)
         {
             var result = await _userManager.CreateAsync(user, password);
+
             if (!result.Succeeded)
+            {
                 throw new Exception(result.Errors.Select(e => e.Description).FirstOrDefault());
+            }
 
             try
             {

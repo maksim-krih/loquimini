@@ -1,10 +1,17 @@
 import { IAccount, User } from "../types";
 
-const userLocalStorageKey = "user";
+const LocalStorageKeys = {
+  User: "user",
+  Token: "token"
+}
 
 class AuthService {
   public get User() {
     return this.getUser() as User;
+  }
+
+  public get Token() {
+    return this.getToken() as string;
   }
 
   public get IsAuthenticated() {
@@ -27,13 +34,13 @@ class AuthService {
 
   public SetAccount = (data: IAccount) => {
     localStorage.setItem(
-      userLocalStorageKey,
+      LocalStorageKeys.User,
       JSON.stringify(data.user as User)
     );
   };
 
   private getUser() {
-    const userLocalStorage = localStorage.getItem(userLocalStorageKey);
+    const userLocalStorage = localStorage.getItem(LocalStorageKeys.User);
 
     const user = userLocalStorage ? JSON.parse(userLocalStorage) as User : null;
 
@@ -44,6 +51,18 @@ class AuthService {
         email: "",
         id: "",
       };
+    }
+
+    return user;
+  }
+
+  private getToken() {
+    const tokenLocalStorage = localStorage.getItem(LocalStorageKeys.Token);
+
+    const user = tokenLocalStorage ? JSON.parse(tokenLocalStorage) as string : null;
+
+    if (!user) {
+      return "";
     }
 
     return user;

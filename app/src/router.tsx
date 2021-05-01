@@ -4,9 +4,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Login from "./pages/login";
-import Quizzes from "./pages/quizzes";
-import { ScrollToTop } from "./components";
+import Login from "./pages/Login";
+//import Quizzes from "./pages/quizzes";
 import { onlyAuth, withLayout } from "./hocs";
 
 const PrivateRoute = onlyAuth("/login")(Route);
@@ -14,12 +13,10 @@ const PrivateRoute = onlyAuth("/login")(Route);
 const Router = () => {
   return (
     <BrowserRouter>
-      <ScrollToTop>
-        <Switch>
-          <PrivateRoute path="/quizzes" exact component={withLayout(Quizzes)} />
-          <Route path="/login" exact component={Login} />
-        </Switch>
-      </ScrollToTop>
+      <Switch>
+        {/* <PrivateRoute path="/quizzes" exact component={withLayout(Quizzes)} /> */}
+        <Route path="/login" exact component={Login} />
+      </Switch>
     </BrowserRouter>
   );
 };
