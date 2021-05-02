@@ -14,6 +14,7 @@ namespace Loquimini.Repository.UnitOfWork
         readonly IServiceProvider _serviceProvider;
 
         private ITrackableRepository<User, Guid> _userRepository;
+        private IGenericRepository<Role> _roleRepository;
 
         public DatabaseManager(DbContext context, IServiceProvider serviceProvider)
         {
@@ -27,6 +28,15 @@ namespace Loquimini.Repository.UnitOfWork
             {
                 _userRepository = _userRepository ?? _serviceProvider.GetService<ITrackableRepository<User, Guid>>();
                 return _userRepository;
+            }
+        }
+
+        public IGenericRepository<Role> RoleRepository
+        {
+            get
+            {
+                _roleRepository = _roleRepository ?? _serviceProvider.GetService<IGenericRepository<Role>>();
+                return _roleRepository;
             }
         }
 
@@ -44,7 +54,8 @@ namespace Loquimini.Repository.UnitOfWork
         public void Dispose()
         {
             _userRepository?.Dispose();
-            
+            _roleRepository?.Dispose();
+
 
             _context.Dispose();
         }

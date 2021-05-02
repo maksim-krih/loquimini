@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   BrowserRouter,
   Switch,
@@ -7,15 +7,16 @@ import {
 import Login from "./pages/Login";
 //import Quizzes from "./pages/quizzes";
 import { onlyAuth, withLayout } from "./hocs";
+import { RouterPaths } from "./consts";
 
-const PrivateRoute = onlyAuth("/login")(Route);
+const PrivateRoute = onlyAuth(RouterPaths.Login)(Route);
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {/* <PrivateRoute path="/quizzes" exact component={withLayout(Quizzes)} /> */}
-        <Route path="/login" exact component={Login} />
+        <PrivateRoute path={RouterPaths.Main} exact component={withLayout(Component)} />
+        <Route path={RouterPaths.Login} exact component={Login} />
       </Switch>
     </BrowserRouter>
   );

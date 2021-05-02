@@ -8,6 +8,7 @@ namespace Loquimini.Repository.UnitOfWork
     public interface IDatabaseManager : IDisposable
     {
         ITrackableRepository<User, Guid> UserRepository { get; }
+        IGenericRepository<Role> RoleRepository { get; }
 
         bool SaveChanges();
 

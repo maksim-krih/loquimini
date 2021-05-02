@@ -22,12 +22,18 @@ namespace Loquimini.Model.Entities
 
         public string FirstName { get; set; }
 
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+
         public virtual ICollection<UserRole> UserRoles { get; }
 
         public IList<Claim> GetUserClaims()
         {
             return new[] {
                 new Claim(UserClaims.FirstName, FirstName),
+                new Claim(UserClaims.LastName, LastName),
+                new Claim(JwtRegisteredClaimNames.Email, Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Id.ToString())
             };
         }

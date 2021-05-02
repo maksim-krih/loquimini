@@ -1,9 +1,9 @@
-export interface User {
+export interface CredentialsInfo {
   firstName: string;
   lastName: string;
   id: string;
   email: string;
-  role: Role;
+  roles: Array<Role>;
 }
 
 export interface Role {
@@ -11,9 +11,14 @@ export interface Role {
   name: string;
 }
 
-export interface IAccount {
-  user: User;
+export interface UserCredentials {
+  credentialsInfo: CredentialsInfo;
+  accessToken: AccessToken;
+}
+
+export interface AccessToken {
   token: string;
+  expiresIn: number;
 }
 
 export interface IError {

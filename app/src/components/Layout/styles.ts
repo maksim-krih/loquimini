@@ -2,7 +2,8 @@ import {createUseStyles} from 'react-jss'
 
 export const useStyles = createUseStyles({
   trigger: {
-    padding: "0 24px",
+    color: "#fff",
+    padding: "0 26px",
     fontSize: 18,
     lineHeight: "64px",
     cursor: "pointer",
@@ -14,17 +15,25 @@ export const useStyles = createUseStyles({
   logo: {
     height: 32,
     margin: 16,
-    background: "rgba(255, 255, 255, 0.3)"
+    textAlign: "center",
+    overflow: "hidden",
+    "& .ant-typography": {
+      color: "#fff"
+  }
   },
   layout: {
     background: "#fff"
   },
   header: {
-    padding: 0
+    padding: 0,
+    height: 68
   },
   content: {
     margin: '24px 16px',
     padding: 24,
     minHeight: 280,
+  },
+  layoutContainer: {
+    minHeight: '100vh'
   }
 })

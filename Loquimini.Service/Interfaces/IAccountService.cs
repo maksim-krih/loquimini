@@ -1,4 +1,5 @@
 ﻿using Loquimini.Model.Entities;
+using Loquimini.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ namespace Loquimini.Service.Interfaces
 {
     public interface IAccountService : IDisposable
     {
+        Task<UserCredentials> Login(Login login);
 
         User GetById(Guid id);
         Task<User> GetUserByIdAsync(Guid Id);

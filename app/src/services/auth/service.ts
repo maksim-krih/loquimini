@@ -1,4 +1,4 @@
-import { IAccount, User } from "../types";
+import { UserCredentials, CredentialsInfo, AccessToken } from "../types";
 
 const LocalStorageKeys = {
   User: "user",
@@ -7,7 +7,7 @@ const LocalStorageKeys = {
 
 class AuthService {
   public get User() {
-    return this.getUser() as User;
+    return this.getUser() as CredentialsInfo;
   }
 
   public get Token() {
@@ -15,15 +15,11 @@ class AuthService {
   }
 
   public get IsAuthenticated() {
-    return !!this.User.id;
+    return !!this.Token;
   }
 
   public get IsAdmin() {
-    return this.User.role.name === 'Admin'
-  }
-
-  public get IsStudent() {
-    return this.User.role.name === 'Student'
+    return this.User.roles.some(x => x.name === 'Admin');
   }
 
   public SignOut = () => {
@@ -32,17 +28,22 @@ class AuthService {
     window.location.reload();
   };
 
-  public SetAccount = (data: IAccount) => {
+  public SetAccount = (data: UserCredentials) => {
+    debugger;
     localStorage.setItem(
       LocalStorageKeys.User,
-      JSON.stringify(data.user as User)
+      JSON.stringify(data.credentialsInfo as CredentialsInfo)
+    );
+    localStorage.setItem(
+      LocalStorageKeys.Token,
+      JSON.stringify(data.accessToken as AccessToken)
     );
   };
 
   private getUser() {
     const userLocalStorage = localStorage.getItem(LocalStorageKeys.User);
 
-    const user = userLocalStorage ? JSON.parse(userLocalStorage) as User : null;
+    const user = userLocalStorage ? JSON.parse(userLocalStorage) as CredentialsInfo : null;
 
     if (!user) {
       return {
@@ -50,6 +51,7 @@ class AuthService {
         lastName: "",
         email: "",
         id: "",
+        roles: []
       };
     }
 
@@ -59,13 +61,13 @@ class AuthService {
   private getToken() {
     const tokenLocalStorage = localStorage.getItem(LocalStorageKeys.Token);
 
-    const user = tokenLocalStorage ? JSON.parse(tokenLocalStorage) as string : null;
+    const accessToken = tokenLocalStorage ? JSON.parse(tokenLocalStorage) as AccessToken : null;
 
-    if (!user) {
+    if (!accessToken) {
       return "";
     }
 
-    return user;
+    return accessToken.token;
   }
 }
 

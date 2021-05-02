@@ -19,6 +19,7 @@ namespace Loquimini.Data
 			base.OnModelCreating(builder);
 
 			builder.AddConfiguration(new UserConfiguration());
+			builder.AddConfiguration(new RoleConfiguration());
         }
     }
 }

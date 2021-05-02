@@ -1,21 +1,35 @@
-﻿using System;
+﻿using AutoMapper;
+using Loquimini.Mapping;
+using Loquimini.Model.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Loquimini.ModelDTO.UserDTO
 {
-    public class UserDTO //: IProfileBase
+    public class UserDTO: IProfileBase
     {
-        public string FullName { get; set; }
-
-        public string PhoneNumber { get; set; }
-
         public Guid Id { get; set; }
-        
-        //public IProfileExpression Configure(IProfileExpression config)
-        //{
-        //    config.CreateMap<User, UserDTO>()
-        //        .ForMember(x => x.PhoneNumber, cfg => cfg.MapFrom(x => x.UserNameDecrypted));
 
-        //    return config;
-        //}
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+
+        public string UserName { get; set; }
+
+        public IEnumerable<string> Roles { get; set; }
+
+        public IProfileExpression Configure(IProfileExpression config)
+        {
+            config.CreateMap<User, UserDTO>()
+                .ReverseMap()
+                .ForMember(x => x.Id, cfg => cfg.MapFrom(x => x.Id))
+                .ForMember(x => x.UserName, cfg => cfg.MapFrom(x => $"{x.FirstName} {x.LastName}".Trim()));
+
+            return config;
+        }
     }
 }

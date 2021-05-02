@@ -1,7 +1,12 @@
-﻿using Loquimini.Model.Entities;
+﻿using Loquimini.Common.Exceptions;
+using Loquimini.Manager.Interfaces;
+using Loquimini.Model.Entities;
+using Loquimini.Model.User;
 using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +17,48 @@ namespace Loquimini.Service
     public class AccountService : BaseService, IAccountService
     {
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<Role> _roleManager;
+        private readonly RoleManager<Role> _roleManager; 
+        private readonly IConfiguration _config;
+        private readonly ITokenManager _tokenManager;
+
 
         public AccountService(
             IDatabaseManager databaseManager,
             UserManager<User> userManager,
-            RoleManager<Role> roleManager
+            RoleManager<Role> roleManager,
+            IConfiguration config,
+            ITokenManager tokenManager
             ) : base(databaseManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _config = config;
+            _tokenManager = tokenManager;
+        }
+
+        public async Task<UserCredentials> Login(Login login)
+        {
+            var user = await _databaseManager.UserRepository
+                             .Get(x => x.Email == login.Email)
+                             .Include(u => u.UserRoles)
+                                .ThenInclude(up => up.Role)
+                             .FirstOrDefaultAsync();
+
+            if (user != null && !user.IsDeleted)
+            {
+                if (!string.IsNullOrEmpty(login.Password) && await CheckPasswordAsync(user, login.Password))
+                {
+                    return GetUserCredentials(user);
+                }
+                else
+                {
+                    throw new ConflictStatusError("IncorrectCredentials");
+                }
+            }
+            else
+            {
+                throw new ConflictStatusError("UserDoesntExist");
+            }
         }
 
         public async Task<User> GetUserByIdAsync(Guid Id)
@@ -246,6 +283,26 @@ namespace Loquimini.Service
             }
 
             return user;
+        }
+
+        private UserCredentials GetUserCredentials(User user)
+        {
+            var accessToken = new AccessToken(_tokenManager.CreateToken(user), int.Parse(_config["Authorization:TokenExpirationIn"]));
+            var refreshToken = _tokenManager.GenerateToken();
+
+            return new UserCredentials()
+            {
+                AccessToken = accessToken,
+                CredentialsInfo = new CredentialsInfo()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    Id = user.Id,
+                    Roles = user.UserRoles.Select(x => x.Role.Name)
+                }
+            };
         }
     }
 }

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useToggle } from 'ahooks';
 import { Layout as AntLayout, Menu } from 'antd';
 import {
@@ -10,7 +10,9 @@ import {
 } from '@ant-design/icons';
 import { IProps } from './types';
 import { useStyles } from './styles';
+import { Typography } from 'antd';
 
+const { Title } = Typography;
 const { Header, Sider, Content } = AntLayout;
 
 const Layout: FC<IProps> = (props: IProps) => {
@@ -19,9 +21,11 @@ const Layout: FC<IProps> = (props: IProps) => {
   const [collapsed, { toggle }] = useToggle(false);
   
     return (
-      <AntLayout>
+      <AntLayout className={classes.layoutContainer}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className={classes.logo} />
+          <div className={classes.logo}>
+          <Title level={3}>{!collapsed ? "Loquimini" : "L"}</Title>
+          </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<UserOutlined />}>
               nav 1

@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Loquimini.Mapping\Loquimini.Mapping.csproj" />
+    <ProjectReference Include="..\Loquimini.Model\Loquimini.Model.csproj" />
+  </ItemGroup>
+
 </Project>

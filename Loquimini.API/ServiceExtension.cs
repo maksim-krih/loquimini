@@ -1,5 +1,7 @@
 ﻿using Loquimini.Data;
 using Loquimini.Interfaces.Repository;
+using Loquimini.Manager;
+using Loquimini.Manager.Interfaces;
 using Loquimini.Model.Entities;
 using Loquimini.Repository;
 using Loquimini.Repository.UnitOfWork;
@@ -34,6 +36,8 @@ namespace Loquimini.DI
             #region User Managers
 
             services.AddScoped<IDatabaseManager, DatabaseManager>();
+            services.AddScoped<ITokenManager, TokenManager>();
+            services.AddScoped<IIdentityManager, IdentityManager>();
 
             #endregion
 
