@@ -1,5 +1,11 @@
-﻿using Loquimini.Repository.UnitOfWork;
+﻿using AutoMapper.QueryableExtensions;
+using Loquimini.Model.Entities;
+using Loquimini.ModelDTO.UserDTO;
+using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Loquimini.Service
@@ -11,9 +17,5 @@ namespace Loquimini.Service
 
 		}
 
-		public async Task<object> Login(object loginUser)
-		{
-			return null;
-		}
 	}
 }

@@ -26,7 +26,10 @@ export const useStyles = createUseStyles({
   },
   header: {
     padding: 0,
-    height: 68
+    paddingRight: 24,
+    height: 68,
+    display: "flex",
+    justifyContent: "space-between"
   },
   content: {
     margin: '24px 16px',
@@ -35,5 +38,13 @@ export const useStyles = createUseStyles({
   },
   layoutContainer: {
     minHeight: '100vh'
+  },
+  profile: {
+    "& .ant-typography": {
+      color: "#fff"
+    }
+  },
+  user: {
+    marginRight: 8
   }
 })

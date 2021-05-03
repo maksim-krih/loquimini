@@ -24,8 +24,6 @@ namespace Loquimini.Model.Entities
 
         public string LastName { get; set; }
 
-        public string Email { get; set; }
-
         public virtual ICollection<UserRole> UserRoles { get; }
 
         public IList<Claim> GetUserClaims()

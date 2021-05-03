@@ -288,7 +288,6 @@ namespace Loquimini.Service
         private UserCredentials GetUserCredentials(User user)
         {
             var accessToken = new AccessToken(_tokenManager.CreateToken(user), int.Parse(_config["Authorization:TokenExpirationIn"]));
-            var refreshToken = _tokenManager.GenerateToken();
 
             return new UserCredentials()
             {

@@ -1,22 +1,26 @@
 import React, { FC } from 'react';
 import { useToggle } from 'ahooks';
-import { Layout as AntLayout, Menu } from 'antd';
+import { Avatar, Layout as AntLayout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
 } from '@ant-design/icons';
 import { IProps } from './types';
 import { useStyles } from './styles';
 import { Typography } from 'antd';
+import { AuthService } from '../../services';
+import { useHistory } from 'react-router';
+import { RouterPaths } from '../../consts';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const { Header, Sider, Content } = AntLayout;
 
 const Layout: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
+  const history = useHistory();
+  const user = AuthService.User;
 
   const [collapsed, { toggle }] = useToggle(false);
   
@@ -26,15 +30,12 @@ const Layout: FC<IProps> = (props: IProps) => {
           <div className={classes.logo}>
           <Title level={3}>{!collapsed ? "Loquimini" : "L"}</Title>
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
+          <Menu theme="dark" mode="inline">
+            <Menu.Item key="1" icon={<VideoCameraOutlined />}>
+              Houses
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
+            <Menu.Item key="2" icon={<UserOutlined />} onClick={() => history.push(RouterPaths.UserList)}>
+              Users
             </Menu.Item>
           </Menu>
         </Sider>
@@ -45,11 +46,16 @@ const Layout: FC<IProps> = (props: IProps) => {
               : 
               <MenuFoldOutlined  className={classes.trigger} onClick={() => toggle()}/>
             }
+            <div className={classes.profile}>
+              <Avatar className={classes.user} icon={<UserOutlined />}/>
+              <Text >{`${user.firstName} ${user.lastName}`.trim()}</Text>
+              {/* <VideoCameraOutlined /> */}
+            </div>
           </Header>
           <Content
             className={classes.content}
           >
-            Content
+            {props.children}
           </Content>
         </AntLayout>
       </AntLayout>
