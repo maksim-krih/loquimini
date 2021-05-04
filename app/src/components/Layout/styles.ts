@@ -40,7 +40,7 @@ export const useStyles = createUseStyles({
     minHeight: '100vh'
   },
   profile: {
-    "& .ant-typography": {
+    "& .ant-typography, & .anticon": {
       color: "#fff"
     }
   },

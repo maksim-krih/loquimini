@@ -9,6 +9,9 @@ namespace Loquimini.Repository.UnitOfWork
     {
         ITrackableRepository<User, Guid> UserRepository { get; }
         IGenericRepository<Role> RoleRepository { get; }
+        ITrackableRepository<House, Guid> HouseRepository { get; }
+        ITrackableRepository<Flat, Guid> FlatRepository { get; }
+        IGenericRepository<BuildingInfo> BuildingInfoRepository { get; }
 
         bool SaveChanges();
 

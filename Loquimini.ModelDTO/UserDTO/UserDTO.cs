@@ -26,8 +26,8 @@ namespace Loquimini.ModelDTO.UserDTO
         {
             config.CreateMap<User, UserDTO>()
                 .ReverseMap()
-                .ForMember(x => x.Id, cfg => cfg.MapFrom(x => x.Id))
-                .ForMember(x => x.UserName, cfg => cfg.MapFrom(x => $"{x.FirstName} {x.LastName}".Trim()));
+                .ForMember(x => x.Id, cfg => cfg.Ignore())
+                .ForMember(x => x.UserName, cfg => cfg.MapFrom(x => x.Email));
 
             return config;
         }

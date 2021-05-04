@@ -1,9 +1,11 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
-import { GridFilter, GridPager, GridRequest, GridSorter, User } from "../../../services/types";
+import { GridRequest, User } from "../../../services/types";
 import Api from "../../../services";
-import { Table } from "antd";
+import { Button, Table } from "antd";
+import { useHistory } from "react-router";
+import { RouterPaths } from "../../../consts";
 
 const columns = [
   {
@@ -11,10 +13,15 @@ const columns = [
     dataIndex: 'userName',
     render: (text: string, record: User)=> `${record.firstName} ${record.lastName}`
   },
+  {
+    title: 'Email',
+    dataIndex: 'email'
+  },
 ];
 
 const List: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
+  const history = useHistory();
   const [data, setData] = useState([]);
   const [pager, setPager] = useState({
     current: 1,
@@ -39,7 +46,7 @@ const List: FC<IProps> = (props: IProps) => {
       sorter: []
     };
 
-    Api.User.getAll(request)
+    Api.User.getAllGrid(request)
     .then((response: any) => {
       setData(response.data);
     })
@@ -48,13 +55,20 @@ const List: FC<IProps> = (props: IProps) => {
     });
   };
 
-  const handleTableChange = (pagination: any, filters: any, sorting: any, extra: any) => {
+  const handleTableChange = (pagination: any) => {
     setPager(pagination);
     getUsersData();
   };
 
+  const onCreate = () => {
+    history.push(RouterPaths.CreateUser);
+  }
+
   return (
     <div className={classes.container}>
+      <Button onClick={onCreate}>
+        Create
+      </Button>
       <Table
         columns={columns}
         rowKey={(record: User) => record.id}

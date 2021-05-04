@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { useToggle } from 'ahooks';
-import { Avatar, Layout as AntLayout, Menu } from 'antd';
+import { Avatar, Dropdown, Layout as AntLayout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  MoreOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import { IProps } from './types';
 import { useStyles } from './styles';
@@ -23,6 +24,17 @@ const Layout: FC<IProps> = (props: IProps) => {
   const user = AuthService.User;
 
   const [collapsed, { toggle }] = useToggle(false);
+
+  const profileMenu = (
+    <Menu>
+      <Menu.Item>
+        Profile
+      </Menu.Item>
+      <Menu.Item>
+        Sign Out
+      </Menu.Item>
+    </Menu>
+  );
   
     return (
       <AntLayout className={classes.layoutContainer}>
@@ -31,7 +43,7 @@ const Layout: FC<IProps> = (props: IProps) => {
           <Title level={3}>{!collapsed ? "Loquimini" : "L"}</Title>
           </div>
           <Menu theme="dark" mode="inline">
-            <Menu.Item key="1" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
               Houses
             </Menu.Item>
             <Menu.Item key="2" icon={<UserOutlined />} onClick={() => history.push(RouterPaths.UserList)}>
@@ -49,7 +61,9 @@ const Layout: FC<IProps> = (props: IProps) => {
             <div className={classes.profile}>
               <Avatar className={classes.user} icon={<UserOutlined />}/>
               <Text >{`${user.firstName} ${user.lastName}`.trim()}</Text>
-              {/* <VideoCameraOutlined /> */}
+              <Dropdown overlay={profileMenu} trigger={['click']}>
+                <MoreOutlined />
+              </Dropdown>
             </div>
           </Header>
           <Content

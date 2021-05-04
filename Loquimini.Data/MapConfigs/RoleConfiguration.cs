@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Loquimini.Data.MapConfigs
 {
-    public class UserConfiguration : EntityTypeConfiguration<User>
+    public class RoleConfiguration : EntityTypeConfiguration<Role>
     {
-        public override void Map(EntityTypeBuilder<User> entityBuilder)
+        public override void Map(EntityTypeBuilder<Role> entityBuilder)
         {
-            entityBuilder
-                .HasMany(e => e.UserRoles)
-                .WithOne()
-                .HasForeignKey(e => e.UserId);
+            entityBuilder.HasMany<UserRole>()
+                .WithOne(ur => ur.Role)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
         }
     }
 }

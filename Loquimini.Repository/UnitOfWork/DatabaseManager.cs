@@ -15,6 +15,9 @@ namespace Loquimini.Repository.UnitOfWork
 
         private ITrackableRepository<User, Guid> _userRepository;
         private IGenericRepository<Role> _roleRepository;
+        private ITrackableRepository<House, Guid> _houseRepository;
+        private ITrackableRepository<Flat, Guid> _flatRepository;
+        private IGenericRepository<BuildingInfo> _buildingInfoRepository;
 
         public DatabaseManager(DbContext context, IServiceProvider serviceProvider)
         {
@@ -40,6 +43,33 @@ namespace Loquimini.Repository.UnitOfWork
             }
         }
 
+        public ITrackableRepository<House, Guid> HouseRepository
+        {
+            get
+            {
+                _houseRepository = _houseRepository ?? _serviceProvider.GetService<ITrackableRepository<House, Guid>>();
+                return _houseRepository;
+            }
+        }
+
+        public ITrackableRepository<Flat, Guid> FlatRepository
+        {
+            get
+            {
+                _flatRepository = _flatRepository ?? _serviceProvider.GetService<ITrackableRepository<Flat, Guid>>();
+                return _flatRepository;
+            }
+        }
+
+        public IGenericRepository<BuildingInfo> BuildingInfoRepository
+        {
+            get
+            {
+                _buildingInfoRepository = _buildingInfoRepository ?? _serviceProvider.GetService<IGenericRepository<BuildingInfo>>();
+                return _buildingInfoRepository;
+            }
+        }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() > 0;
@@ -55,6 +85,9 @@ namespace Loquimini.Repository.UnitOfWork
         {
             _userRepository?.Dispose();
             _roleRepository?.Dispose();
+            _houseRepository?.Dispose();
+            _flatRepository?.Dispose();
+            _buildingInfoRepository?.Dispose();
 
 
             _context.Dispose();

@@ -1,5 +1,6 @@
 import axios from "axios";
 import AuthApi from "./auth";
+import HouseApi from "./house";
 import UserApi from "./user";
 
 const backendUrl = "https://localhost:44320/api";
@@ -16,6 +17,10 @@ export const BaseApi = axios.create({
 class Api {
   static get Auth() {
     return new AuthApi();
+  }
+
+  static get House() {
+    return new HouseApi();
   }
 
   static get User() {

@@ -23,8 +23,12 @@ namespace Loquimini.Model.Entities
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
+        
         public virtual ICollection<UserRole> UserRoles { get; }
+
+        public virtual ICollection<House> Houses { get; }
+        
+        public virtual ICollection<Flat> Flats { get; }
 
         public IList<Claim> GetUserClaims()
         {

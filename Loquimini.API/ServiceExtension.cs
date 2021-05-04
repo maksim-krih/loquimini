@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Loquimini.DI
+namespace Loquimini.API
 {
     public static class ServiceExtension
     {
@@ -44,7 +44,7 @@ namespace Loquimini.DI
             #region Services
 
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IHouseService, HouseService>();
 
             #endregion
 

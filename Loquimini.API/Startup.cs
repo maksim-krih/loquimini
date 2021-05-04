@@ -1,5 +1,4 @@
-﻿using Loquimini.DI;
-using Loquimini.Mapping;
+﻿using Loquimini.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

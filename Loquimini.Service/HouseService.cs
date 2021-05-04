@@ -10,12 +10,18 @@ using System.Threading.Tasks;
 
 namespace Loquimini.Service
 {
-	public class UserService : BaseService, IUserService
+	public class HouseService : BaseService, IHouseService
 	{
-		public UserService(IDatabaseManager databaseManager) : base(databaseManager)
+		public HouseService(IDatabaseManager databaseManager) : base(databaseManager)
 		{
 
 		}
 
-	}
+        public async Task<House> CreateHouseAsync(House house)
+        {
+            
+            return null;
+        }
+
+    }
 }

@@ -7,7 +7,10 @@ class AuthApi {
   public login = async (model: Login): Promise<UserCredentials> => {
     return BaseApi.post(Url.Login, model)
       .then((response: any) => response.data)
-      .catch((e: IError) => console.log("", e));
+      .catch((e: IError) => {
+        console.log("AuthApi.login: ", e)
+        throw e;
+      });
   };
 }
 

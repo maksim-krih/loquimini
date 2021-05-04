@@ -2,7 +2,6 @@
 using Loquimini.API.Controllers.Base;
 using Loquimini.Common.Exceptions;
 using Loquimini.Model.Entities;
-using Loquimini.ModelDTO;
 using Loquimini.ModelDTO.GridDTO;
 using Loquimini.ModelDTO.UserDTO;
 using Loquimini.Repository.UnitOfWork;
@@ -18,32 +17,40 @@ namespace Loquimini.API.Controllers
     public class UserController : BaseController
     {
         private readonly IAccountService _accountService;
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
         public UserController(
             IDatabaseManager databaseManager,
             IAccountService accountService,
-            IMapper mapper,
-            IUserService userService
+            IMapper mapper
         ) : base(databaseManager)
         {
             _accountService = accountService;
             _mapper = mapper;
-            _userService = userService;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GridResponseDTO<UserDTO>))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
-        public async Task<IActionResult> GetAll(GridRequestDTO request)
+        public async Task<IActionResult> GetAllGrid(GridRequestDTO request)
         {
 			var users = _databaseManager.UserRepository.Get();
 
-            var gridResponse = await request.GenerateGridResponseAsync(_mapper.Map<UserDTO>(users);
+            var gridResponse = await request.GenerateGridResponseAsync(users);
 
             return Ok(gridResponse);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<UserDTO>))]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
+        public async Task<IActionResult> GetAll()
+        {
+            var users = _databaseManager.UserRepository.Get();
+
+            return Ok(users);
         }
 
         [HttpPost]

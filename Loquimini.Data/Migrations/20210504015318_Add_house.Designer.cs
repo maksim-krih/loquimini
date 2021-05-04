@@ -4,14 +4,16 @@ using Loquimini.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Loquimini.Data.Migrations
 {
     [DbContext(typeof(LoquiminiDbContext))]
-    partial class LoquiminiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210504015318_Add_house")]
+    partial class Add_house
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -16,18 +16,17 @@ const Login: FC<IProps> = (props: IProps) => {
   const [password, setPassword] = useState("");
 
   const onLogin = async () => {
-    try {
-      const accountInfo = await Api.Auth.login({
-        email,
-        password
-      });
-      
+    Api.Auth.login({
+      email,
+      password
+    })
+    .then(accountInfo => {
       AuthService.SetAccount(accountInfo);
       history.push(RouterPaths.Main);
-    }
-    catch {
+    })
+    .catch(e => {
 
-    }
+    });
   };
 
   return (

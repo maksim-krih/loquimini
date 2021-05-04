@@ -1,24 +1,19 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
-import { GridFilter, GridPager, GridRequest, GridSorter, User } from "../../../services/types";
+import { CreateUser } from "../../../services/types";
 import Api from "../../../services";
-import { Table } from "antd";
+import { Button, Form, Input } from "antd";
+import { useHistory } from "react-router-dom";
+import { RouterPaths, validateMessages } from "../../../consts";
 
-const columns = [
-  {
-    title: 'UserName',
-    dataIndex: 'userName',
-  },
-];
+const FormItem = Form.Item;
+const { Password } = Input;
 
 const General: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
-  const [pager, setPager] = useState({
-    current: 1,
-    pageSize: 10
-  });
+  const history = useHistory();
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -26,42 +21,82 @@ const General: FC<IProps> = (props: IProps) => {
   }, []);
 
   const getUsersData = () => {
-    setLoading(true);
+  };
 
-    const request: GridRequest = {
-      filters: [],
-      pager,
-      search: {
-        fields: [],
-        value: ""
-      },
-      sorter: []
-    };
+  const onCancel = () => {
+    history.goBack()
+  }
 
-    Api.User.getAll(request)
-    .then((response: any) => {
-      setData(response.data);
-    })
-    .finally(() => {
-      setLoading(false);
+  const onFinish = (values: CreateUser) => {
+    values.roles = ["User"];
+    Api.User.create(values)
+    .then(() => {
+      history.push(RouterPaths.UserList);
     });
   };
 
-  const handleTableChange = (pagination: any, filters: any, sorting: any, extra: any) => {
-    setPager(pagination);
-    getUsersData();
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
   };
+
+  const renderCreate = (
+    <div>
+      <Button onClick={() => form.submit()}>
+        Create
+      </Button>
+      <Button onClick={onCancel}>
+        Cancel
+      </Button>
+      <Form
+        labelCol={{ span: 3 }}
+        wrapperCol={{ span: 10 }}
+        form={form}
+        name="user"
+        validateMessages={validateMessages}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
+        <FormItem
+          label="First Name"
+          name="firstName"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </FormItem>
+    
+        <FormItem
+          label="Last Name"
+          name="lastName"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </FormItem>
+
+        <FormItem
+          label="Email"
+          name="email"
+          rules={[{ required: true }]}
+        >
+          <Input type="email" />
+        </FormItem>
+
+        <FormItem
+          label="Password"
+          name="password"
+          rules={[{ required: true }]}
+        >
+          <Password />
+        </FormItem>
+      </Form>
+    </div>
+  );
 
   return (
     <div className={classes.container}>
-      <Table
-        columns={columns}
-        rowKey={(record: User) => record.id}
-        dataSource={data}
-        pagination={pager}
-        loading={loading}
-        onChange={handleTableChange}
-      />
+      {props.isCreate ? renderCreate
+      : (
+        <div></div>
+      )}
     </div>
   );
 }

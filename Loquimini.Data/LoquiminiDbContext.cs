@@ -20,6 +20,8 @@ namespace Loquimini.Data
 
 			builder.AddConfiguration(new UserConfiguration());
 			builder.AddConfiguration(new RoleConfiguration());
+			builder.AddConfiguration(new FlatConfiguration());
+			builder.AddConfiguration(new HouseConfiguration());
         }
     }
 }
