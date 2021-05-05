@@ -9,7 +9,7 @@ namespace Loquimini.ModelDTO.HouseDTO
 {
     public class BuildingInfoDTO: IProfileBase
     {
-        public int Area { get; set; }
+        public double Area { get; set; }
 
         public IProfileExpression Configure(IProfileExpression config)
         {

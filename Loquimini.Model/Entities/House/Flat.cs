@@ -1,5 +1,6 @@
 ﻿using Loquimini.Model.Core;
 using System;
+using System.Collections.Generic;
 
 namespace Loquimini.Model.Entities
 {
@@ -18,5 +19,7 @@ namespace Loquimini.Model.Entities
         public virtual BuildingInfo Info { get; set; }
 
         public virtual House House { get; set; }
+
+        public virtual ICollection<Receipt> Receipts { get; set; }
     }
 }

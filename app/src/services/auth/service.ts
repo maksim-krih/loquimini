@@ -24,8 +24,6 @@ class AuthService {
 
   public SignOut = () => {
     localStorage.clear();
-
-    window.location.reload();
   };
 
   public SetAccount = (data: UserCredentials) => {

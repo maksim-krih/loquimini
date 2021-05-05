@@ -7,7 +7,7 @@ namespace Loquimini.Model.Entities
 {
     public class BuildingInfo : CoreEntity<Guid>
     {
-        public int Area { get; set; }
+        public double Area { get; set; }
 
         public Guid? FlatId { get; set; }
 
@@ -16,5 +16,7 @@ namespace Loquimini.Model.Entities
         public virtual Flat Flat { get; set; }
 
         public virtual House House { get; set; }
+
+        public virtual ICollection<DefaultIndicator> DefaultIndicators { get; set; }
     }
 }

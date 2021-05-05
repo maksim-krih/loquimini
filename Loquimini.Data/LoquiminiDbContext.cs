@@ -22,6 +22,8 @@ namespace Loquimini.Data
 			builder.AddConfiguration(new RoleConfiguration());
 			builder.AddConfiguration(new FlatConfiguration());
 			builder.AddConfiguration(new HouseConfiguration());
-        }
+			builder.AddConfiguration(new ReceiptConfiguration());
+			builder.AddConfiguration(new DefaultIndicatorConfiguration());
+		}
     }
 }

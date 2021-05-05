@@ -6,7 +6,8 @@ import {
   MenuFoldOutlined,
   UserOutlined,
   MoreOutlined,
-  HomeOutlined
+  HomeOutlined,
+  ApartmentOutlined
 } from '@ant-design/icons';
 import { IProps } from './types';
 import { useStyles } from './styles';
@@ -25,12 +26,17 @@ const Layout: FC<IProps> = (props: IProps) => {
 
   const [collapsed, { toggle }] = useToggle(false);
 
+  const onSignOut = () => {
+    AuthService.SignOut();
+    history.push(RouterPaths.Login);
+  }
+
   const profileMenu = (
     <Menu>
       <Menu.Item>
         Profile
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item onClick={onSignOut}>
         Sign Out
       </Menu.Item>
     </Menu>
@@ -43,12 +49,20 @@ const Layout: FC<IProps> = (props: IProps) => {
           <Title level={3}>{!collapsed ? "Loquimini" : "L"}</Title>
           </div>
           <Menu theme="dark" mode="inline">
-            <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
-              Houses
-            </Menu.Item>
-            <Menu.Item key="2" icon={<UserOutlined />} onClick={() => history.push(RouterPaths.UserList)}>
-              Users
-            </Menu.Item>
+            {AuthService.IsAdmin ? (
+              <>
+                <Menu.Item key="1" icon={<ApartmentOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
+                  Houses
+                </Menu.Item>
+                <Menu.Item key="2" icon={<UserOutlined />} onClick={() => history.push(RouterPaths.UserList)}>
+                  Users
+                </Menu.Item>
+              </>
+            ) : (
+              <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
+                General
+              </Menu.Item>
+            )}
           </Menu>
         </Sider>
         <AntLayout className={classes.layout}>
