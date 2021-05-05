@@ -56,6 +56,12 @@ const Router = () => {
             <HouseGeneral />
           </Layout>
         </PrivateRoute>
+
+        <PrivateRoute path={RouterPaths.GeneralUserTemplate} exact>
+          <Layout>
+            <UserGeneral />
+          </Layout>
+        </PrivateRoute>
       </Switch>
     </BrowserRouter>
   );

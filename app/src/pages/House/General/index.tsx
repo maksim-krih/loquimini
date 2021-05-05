@@ -11,7 +11,6 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useToggle } from "ahooks";
 
 const FormItem = Form.Item;
-
 const { Title } = Typography;
 
 const General: FC<IProps> = (props: IProps) => {
@@ -85,7 +84,6 @@ const General: FC<IProps> = (props: IProps) => {
         history.push(RouterPaths.HouseList);
       });
     }
-    
   };
 
   const onFinishFailed = (errorInfo: any) => {

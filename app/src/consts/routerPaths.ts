@@ -7,6 +7,8 @@ class RouterPaths {
   public static CreateHouse = "/house/create";
   public static GeneralHouseTemplate = "/house/:id";
   public static GeneralHouse = (id: string) => `/house/${id}`;
+  public static GeneralUserTemplate = "/user/:id";
+  public static GeneralUser = (id: string) => `/user/${id}`;
 }
 
 export default RouterPaths;

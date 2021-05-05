@@ -1,49 +1,88 @@
 import { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
-import { CreateUser } from "../../../services/types";
+import { CreateUser, User } from "../../../services/types";
 import Api from "../../../services";
 import { Button, Form, Input } from "antd";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { RouterPaths, validateMessages } from "../../../consts";
+import { useToggle } from "ahooks";
 
 const FormItem = Form.Item;
 const { Password } = Input;
 
 const General: FC<IProps> = (props: IProps) => {
+  const { isCreate } = props;
   const classes = useStyles();
   const history = useHistory();
+  const { id } = useParams<{id: string}>();
   const [form] = Form.useForm();
+  const [data, setData] = useState<User>(Object);
   const [loading, setLoading] = useState(false);
+  const [isEdit, { toggle }] = useToggle(false);
+  const readonly = !isCreate && !isEdit;
 
   useEffect(() => {
-    getUsersData();
+    if (!isCreate) {
+      getUser();
+    }
   }, []);
 
-  const getUsersData = () => {
+  const getUser = () => {
+    Api.User.getById(id)
+    .then((response: User) => {
+      setData(response);
+      form.resetFields();
+    })
   };
 
   const onCancel = () => {
-    history.goBack()
+    if (isCreate || !isEdit)
+    {
+      history.goBack();
+    }
+    else {
+      form.resetFields();
+      toggle();
+    }
   }
 
-  const onFinish = (values: CreateUser) => {
-    values.roles = ["User"];
-    Api.User.create(values)
-    .then(() => {
-      history.push(RouterPaths.UserList);
-    });
+  const onFinish = (values: any) => {
+    if(isCreate) {
+      const model = values as CreateUser;
+    
+      values.roles = ["User"];
+      Api.User.create(model)
+      .then(() => {
+        history.push(RouterPaths.UserList);
+      });
+    }
+    else {
+      const model = values as User;
+      model.id = data.id;
+
+      Api.User.update(model)
+      .then(() => {
+        history.push(RouterPaths.UserList);
+      });
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
-  const renderCreate = (
-    <div>
-      <Button onClick={() => form.submit()}>
-        Create
-      </Button>
+  return (
+    <div className={classes.container}>
+      {isCreate ? (
+        <Button onClick={() => form.submit()}>
+          Create
+        </Button>
+      ) : (
+        <Button onClick={() => isEdit ? form.submit() : toggle()}>
+          Edit
+        </Button>
+      )}
       <Button onClick={onCancel}>
         Cancel
       </Button>
@@ -52,6 +91,7 @@ const General: FC<IProps> = (props: IProps) => {
         wrapperCol={{ span: 10 }}
         form={form}
         name="user"
+        initialValues={data.id ? data : {}}
         validateMessages={validateMessages}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -61,7 +101,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="firstName"
           rules={[{ required: true }]}
         >
-          <Input />
+          <Input disabled={readonly} />
         </FormItem>
     
         <FormItem
@@ -69,7 +109,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="lastName"
           rules={[{ required: true }]}
         >
-          <Input />
+          <Input disabled={readonly} />
         </FormItem>
 
         <FormItem
@@ -77,26 +117,19 @@ const General: FC<IProps> = (props: IProps) => {
           name="email"
           rules={[{ required: true }]}
         >
-          <Input type="email" />
+          <Input type="email" disabled={readonly} />
         </FormItem>
 
-        <FormItem
-          label="Password"
-          name="password"
-          rules={[{ required: true }]}
-        >
-          <Password />
-        </FormItem>
+        {isCreate && (
+          <FormItem
+            label="Password"
+            name="password"
+            rules={[{ required: true }]}
+          >
+            <Password />
+          </FormItem>
+        )}
       </Form>
-    </div>
-  );
-
-  return (
-    <div className={classes.container}>
-      {props.isCreate ? renderCreate
-      : (
-        <div></div>
-      )}
     </div>
   );
 }

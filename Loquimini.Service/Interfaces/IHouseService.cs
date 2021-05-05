@@ -1,8 +1,6 @@
 ﻿using Loquimini.Model.Entities;
-using Loquimini.Model.User;
 using Loquimini.ModelDTO.HouseDTO;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Loquimini.Service.Interfaces
