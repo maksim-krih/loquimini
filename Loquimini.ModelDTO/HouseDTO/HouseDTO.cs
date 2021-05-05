@@ -17,11 +17,11 @@ namespace Loquimini.ModelDTO.HouseDTO
 
         public HouseType Type { get; set; }
 
-        public Guid? UserId { get; }
+        public Guid? UserId { get; set; }
 
-        public BuildingInfoDTO Info { get; }
+        public BuildingInfoDTO Info { get; set; }
 
-        public ICollection<FlatDTO> Flats { get; }
+        public ICollection<FlatDTO> Flats { get; set; }
 
         public IProfileExpression Configure(IProfileExpression config)
         {

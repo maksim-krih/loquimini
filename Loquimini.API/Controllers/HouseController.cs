@@ -8,6 +8,8 @@ using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace Loquimini.API.Controllers
@@ -34,9 +36,9 @@ namespace Loquimini.API.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
         public async Task<IActionResult> GetAllGrid(GridRequestDTO request)
         {
-			var users = _databaseManager.HouseRepository.Get();
+			var houses = _databaseManager.HouseRepository.Get();
 
-            var gridResponse = await request.GenerateGridResponseAsync(users);
+            var gridResponse = await request.GenerateGridResponseAsync(houses);
 
             return Ok(gridResponse);
         }
@@ -53,5 +55,48 @@ namespace Loquimini.API.Controllers
 
             return Ok(_mapper.Map<HouseDTO>(house));
         }
-	}
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseDTO))]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
+        public async Task<IActionResult> Update([FromBody]HouseDTO houseDTO)
+        {
+            var house = await _houseService.UpdateHouseAsync(houseDTO);
+
+            return Ok(_mapper.Map<HouseDTO>(house));
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseDTO))]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
+        public async Task<IActionResult> GetById([FromQuery] Guid id)
+        {
+            var house = await _databaseManager.HouseRepository
+                .Get(x => x.Id == id)
+                .Include(x => x.Flats)
+                    .ThenInclude(x => x.Info)
+                .Include(x => x.Info)
+                .FirstOrDefaultAsync();
+
+            return Ok(_mapper.Map<HouseDTO>(house));
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
+        public async Task<IActionResult> DeleteById([FromQuery] Guid id)
+        {
+            var house = await _databaseManager.HouseRepository
+                .GetByIdAsync(id);
+
+            _databaseManager.HouseRepository.Delete(house);
+
+            var saved = await _databaseManager.SaveChangesAsync();
+
+            return Ok(saved);
+        }
+    }
 }

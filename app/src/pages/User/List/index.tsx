@@ -5,7 +5,7 @@ import { GridRequest, User } from "../../../services/types";
 import Api from "../../../services";
 import { Button, Table } from "antd";
 import { useHistory } from "react-router";
-import { RouterPaths } from "../../../consts";
+import { DefaultGridRequest, DefaultPager, RouterPaths } from "../../../consts";
 
 const columns = [
   {
@@ -23,10 +23,7 @@ const List: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const history = useHistory();
   const [data, setData] = useState([]);
-  const [pager, setPager] = useState({
-    current: 1,
-    pageSize: 10
-  });
+  const [pager, setPager] = useState(DefaultPager);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -36,15 +33,7 @@ const List: FC<IProps> = (props: IProps) => {
   const getUsersData = () => {
     setLoading(true);
 
-    const request: GridRequest = {
-      filters: [],
-      pager,
-      search: {
-        fields: [],
-        value: ""
-      },
-      sorter: []
-    };
+    const request = DefaultGridRequest(pager);
 
     Api.User.getAllGrid(request)
     .then((response: any) => {

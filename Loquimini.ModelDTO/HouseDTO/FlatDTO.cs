@@ -13,9 +13,9 @@ namespace Loquimini.ModelDTO.HouseDTO
 
         public string Number { get; set; }
 
-        public Guid? UserId { get; }
+        public Guid? UserId { get; set; }
 
-        public BuildingInfoDTO Info { get; }
+        public BuildingInfoDTO Info { get; set; }
 
         public IProfileExpression Configure(IProfileExpression config)
         {

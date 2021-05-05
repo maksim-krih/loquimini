@@ -37,6 +37,7 @@ export interface GridFilter {
 
 export interface GridPager {
   current: number;
+  total: number;
   pageSize: number;
 }
 
@@ -105,4 +106,5 @@ export interface CreateHouse {
   type: HouseType;
   userId?: string;
   info?: BuildingInfo;
+  flats: Array<Flat>;
 }

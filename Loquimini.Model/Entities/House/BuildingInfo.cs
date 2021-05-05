@@ -13,8 +13,8 @@ namespace Loquimini.Model.Entities
 
         public Guid? HouseId { get; set; }
 
-        public virtual Flat Flat { get; }
+        public virtual Flat Flat { get; set; }
 
-        public virtual House House { get; }
+        public virtual House House { get; set; }
     }
 }

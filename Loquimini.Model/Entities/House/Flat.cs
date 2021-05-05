@@ -13,10 +13,10 @@ namespace Loquimini.Model.Entities
 
         public Guid HouseId { get; set; }
 
-        public virtual User User { get; }
+        public virtual User User { get; set; }
 
-        public virtual BuildingInfo Info { get; }
+        public virtual BuildingInfo Info { get; set; }
 
-        public virtual House House { get; }
+        public virtual House House { get; set; }
     }
 }

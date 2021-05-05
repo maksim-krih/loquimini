@@ -1,10 +1,12 @@
-const RouterPaths = {
-  Login: "/login",
-  Main: "/",
-  UserList: "/users",
-  CreateUser: "/user/create",
-  HouseList: "/houses",
-  CreateHouse: "/house/create"
+class RouterPaths {
+  public static Login = "/login";
+  public static Main = "/";
+  public static UserList = "/users";
+  public static CreateUser = "/user/create";
+  public static HouseList = "/houses";
+  public static CreateHouse = "/house/create";
+  public static GeneralHouseTemplate = "/house/:id";
+  public static GeneralHouse = (id: string) => `/house/${id}`;
 }
 
 export default RouterPaths;

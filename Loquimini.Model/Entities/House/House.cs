@@ -17,10 +17,10 @@ namespace Loquimini.Model.Entities
 
         public Guid InfoId { get; set; }
 
-        public virtual User User { get; }
+        public virtual User User { get; set; }
 
-        public virtual BuildingInfo Info { get; }
+        public virtual BuildingInfo Info { get; set; }
 
-        public virtual ICollection<Flat> Flats { get; }
+        public virtual ICollection<Flat> Flats { get; set; }
     }
 }

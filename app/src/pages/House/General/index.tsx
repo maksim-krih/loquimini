@@ -1,24 +1,38 @@
 import { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
-import { CreateHouse, GridRequest, User } from "../../../services/types";
+import { CreateHouse, House, User } from "../../../services/types";
 import Api from "../../../services";
-import { Button, Dropdown, Form, Input, InputNumber, Select } from "antd";
-import { useHistory } from "react-router-dom";
+import { Button, Form, Input, InputNumber, Select, Typography } from "antd";
+import { useHistory, useParams } from "react-router-dom";
 import { RouterPaths, validateMessages } from "../../../consts";
 import { HouseType, HouseTypeSelect } from "../../../enums";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { useToggle } from "ahooks";
 
 const FormItem = Form.Item;
 
+const { Title } = Typography;
+
 const General: FC<IProps> = (props: IProps) => {
+  const { isCreate } = props;
   const classes = useStyles();
   const history = useHistory();
+  const { id } = useParams<{id: string}>();
   const [form] = Form.useForm();
   const [users, setUsers] = useState<Array<User>>([]);
+  const [data, setData] = useState<House>(Object);
+  const [houseType, setHouseType] = useState(HouseType.Private);
   const [loading, setLoading] = useState(false);
+  const [isEdit, { toggle }] = useToggle(false);
+  const readonly = !isCreate && !isEdit;
 
   useEffect(() => {
     getUsers();
+
+    if (!isCreate) {
+      getHouse();
+    }
   }, []);
 
   const getUsers = () => {
@@ -33,11 +47,44 @@ const General: FC<IProps> = (props: IProps) => {
     });
   };
 
+  const getHouse = () => {
+    Api.House.getById(id)
+    .then((response: House) => {
+      setData(response);
+      setHouseType(response.type);
+      form.resetFields();
+    })
+  };
+
   const onCancel = () => {
-    history.goBack()
+    if (isCreate || !isEdit)
+    {
+      history.goBack();
+    }
+    else {
+      form.resetFields();
+      toggle();
+    }
   }
 
-  const onFinish = (values: CreateHouse) => {
+  const onFinish = (values: any) => {
+    if(isCreate) {
+      const model = values as CreateHouse;
+
+      Api.House.create(model)
+      .then(() => {
+        history.push(RouterPaths.HouseList);
+      });
+    }
+    else {
+      const model = values as House;
+      model.id = data.id;
+
+      Api.House.update(model)
+      .then(() => {
+        history.push(RouterPaths.HouseList);
+      });
+    }
     
   };
 
@@ -45,11 +92,21 @@ const General: FC<IProps> = (props: IProps) => {
     console.log('Failed:', errorInfo);
   };
 
-  const renderCreate = (
-    <div>
-      <Button onClick={() => form.submit()}>
-        Create
-      </Button>
+  const onTypeChange = (value: HouseType) => {
+    setHouseType(value);
+  };
+
+  return (
+    <div className={classes.container}>
+      {isCreate ? (
+        <Button onClick={() => form.submit()}>
+          Create
+        </Button>
+      ) : (
+        <Button onClick={() => isEdit ? form.submit() : toggle()}>
+          Edit
+        </Button>
+      )}
       <Button onClick={onCancel}>
         Cancel
       </Button>
@@ -59,7 +116,7 @@ const General: FC<IProps> = (props: IProps) => {
         form={form}
         name="house"
         validateMessages={validateMessages}
-        initialValues={{
+        initialValues={data.id ? data : {
           type: HouseType.Private
         }}
         onFinish={onFinish}
@@ -70,7 +127,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="street"
           rules={[{ required: true }]}
         >
-          <Input />
+          <Input disabled={readonly}/>
         </FormItem>
     
         <FormItem
@@ -78,44 +135,98 @@ const General: FC<IProps> = (props: IProps) => {
           name="number"
           rules={[{ required: true }]}
         >
-          <Input />
+          <Input disabled={readonly}/>
         </FormItem>
 
         <FormItem
           label="Type"
           name="type"
+          rules={[{ required: true }]}
         >
           <Select
             options={HouseTypeSelect}
+            onChange={onTypeChange}
+            disabled={readonly}
           />
         </FormItem>
-        <FormItem
-          label="User"
-          name="userId"
-        >
-          <Select
-            options={users.map(x => ({
-              value: x.id,
-              label: x.email
-            }))}
-          />
-        </FormItem>
-        <FormItem
-          label="Area"
-          name={["info", "area"]}
-        >
-          <InputNumber />
-        </FormItem>
+        {houseType === HouseType.Private ? (
+          <>
+            <FormItem
+              label="User"
+              name="userId"
+              rules={[{ required: true }]}
+            >
+              <Select
+                options={users.map(x => ({
+                  value: x.id,
+                  label: x.email
+                }))}
+                disabled={readonly}
+              />
+            </FormItem>
+            <FormItem
+              label="Area"
+              name={["info", "area"]}
+              rules={[{ required: true }]}
+            >
+              <InputNumber disabled={readonly} />
+            </FormItem>
+          </>
+        ) : (
+          <>
+            <Title level={4}>Flats</Title>
+            <Form.List name="flats">
+              {(fields, { add, remove }) => (
+                <>
+                  {fields.map(({ key, name, fieldKey, ...restField }) => (
+                    <>
+                      <Form.Item
+                        {...restField}
+                        name={[name, 'number']}
+                        fieldKey={[fieldKey, 'number']}
+                        label="Number"
+                        rules={[{ required: true }]}
+                      >
+                        <Input disabled={readonly} />
+                      </Form.Item>
+                      <Form.Item
+                        {...restField}
+                        name={[name, 'userId']}
+                        fieldKey={[fieldKey, 'userId']}
+                        label="User"
+                        rules={[{ required: true }]}
+                      >
+                        <Select
+                          options={users.map(x => ({
+                            value: x.id,
+                            label: x.email
+                          }))}
+                          disabled={readonly}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        {...restField}
+                        name={[name, 'info', 'area']}
+                        fieldKey={[fieldKey, 'info', 'area']}
+                        label="Area"
+                        rules={[{ required: true }]}
+                      >
+                        <InputNumber disabled={readonly} />
+                      </Form.Item>
+                      <MinusCircleOutlined onClick={() => remove(name)} />
+                    </>
+                  ))}
+                  <Form.Item>
+                    <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                      Add field
+                    </Button>
+                  </Form.Item>
+                </>
+              )}
+            </Form.List>
+          </>
+        )}
       </Form>
-    </div>
-  );
-
-  return (
-    <div className={classes.container}>
-      {props.isCreate ? renderCreate
-      : (
-        <div></div>
-      )}
     </div>
   );
 }

@@ -20,6 +20,41 @@ class HouseApi {
         throw e;
       });
   };
+
+  public update = async (model: House): Promise<House> => {
+    return BaseApi.post(Url.Update, model)
+      .then((response: any) => response.data)
+      .catch((e: IError) => {
+        console.log("HouseApi.update: ", e);
+        throw e;
+      });
+  };
+
+  public getById = async (id: string): Promise<House> => {
+    const params = {
+      id
+    };
+
+    return BaseApi.get(Url.GetById, { params })
+      .then((response: any) => response.data)
+      .catch((e: IError) => {
+        console.log("HouseApi.getById: ", e);
+        throw e;
+      });
+  };
+
+  public deleteById = async (id: string): Promise<boolean> => {
+    const params = {
+      id
+    };
+    
+    return BaseApi.delete(Url.DeleteById, { params })
+      .then((response: any) => response.data)
+      .catch((e: IError) => {
+        console.log("HouseApi.deleteById: ", e);
+        throw e;
+      });
+  };
 }
 
 export default HouseApi;
