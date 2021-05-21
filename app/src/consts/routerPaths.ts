@@ -9,6 +9,8 @@ class RouterPaths {
   public static GeneralHouse = (id: string) => `/house/${id}`;
   public static GeneralUserTemplate = "/user/:id";
   public static GeneralUser = (id: string) => `/user/${id}`;
+  public static Triggers = "/triggers";
+  public static ReceiptsTotalInfo = "/total-info";
 }
 
 export default RouterPaths;

@@ -8,6 +8,7 @@
         Electricity,
         Intercom,
         HotWater,
-        ColdWater
+        ColdWater,
+        Sewerage
     }
 }

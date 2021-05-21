@@ -12,6 +12,7 @@ namespace Loquimini.Repository.UnitOfWork
         ITrackableRepository<House, Guid> HouseRepository { get; }
         ITrackableRepository<Flat, Guid> FlatRepository { get; }
         IGenericRepository<BuildingInfo> BuildingInfoRepository { get; }
+        IGenericRepository<Receipt> ReceiptRepository { get; }
 
         bool SaveChanges();
 

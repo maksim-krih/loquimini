@@ -19,7 +19,7 @@ class AuthService {
   }
 
   public get IsAdmin() {
-    return this.User.roles.some(x => x.name === 'Admin');
+    return this.User.roles.some(x => x === 'Admin');
   }
 
   public SignOut = () => {
@@ -27,7 +27,6 @@ class AuthService {
   };
 
   public SetAccount = (data: UserCredentials) => {
-    debugger;
     localStorage.setItem(
       LocalStorageKeys.User,
       JSON.stringify(data.credentialsInfo as CredentialsInfo)

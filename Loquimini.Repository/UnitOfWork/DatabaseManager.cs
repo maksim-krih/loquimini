@@ -18,6 +18,7 @@ namespace Loquimini.Repository.UnitOfWork
         private ITrackableRepository<House, Guid> _houseRepository;
         private ITrackableRepository<Flat, Guid> _flatRepository;
         private IGenericRepository<BuildingInfo> _buildingInfoRepository;
+        private IGenericRepository<Receipt> _receiptRepository;
 
         public DatabaseManager(DbContext context, IServiceProvider serviceProvider)
         {
@@ -70,6 +71,15 @@ namespace Loquimini.Repository.UnitOfWork
             }
         }
 
+        public IGenericRepository<Receipt> ReceiptRepository
+        {
+            get
+            {
+                _receiptRepository = _receiptRepository ?? _serviceProvider.GetService<IGenericRepository<Receipt>>();
+                return _receiptRepository;
+            }
+        }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() > 0;
@@ -88,6 +98,7 @@ namespace Loquimini.Repository.UnitOfWork
             _houseRepository?.Dispose();
             _flatRepository?.Dispose();
             _buildingInfoRepository?.Dispose();
+            _receiptRepository?.Dispose();
 
 
             _context.Dispose();

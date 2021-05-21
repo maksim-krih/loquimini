@@ -49,7 +49,7 @@ namespace Loquimini.Service
 
             if (houseDTO.Type != house.Type)
             {
-                if (houseDTO.Type == HouseType.Private)
+                if (houseDTO.Type == HouseType.Apartment)
                 {
                     _databaseManager.BuildingInfoRepository.Delete(house.Info);
                 }

@@ -5,12 +5,7 @@ export interface CredentialsInfo {
   lastName: string;
   id: string;
   email: string;
-  roles: Array<Role>;
-}
-
-export interface Role {
-  id: string;
-  name: string;
+  roles: Array<string>;
 }
  
 export interface UserCredentials {
@@ -68,7 +63,7 @@ export interface User {
   lastName: string;
   id: string;
   email: string;
-  roles: Array<Role>;
+  roles: Array<string>;
 }
 
 export interface House {

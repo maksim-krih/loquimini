@@ -46,6 +46,7 @@ namespace Loquimini.API
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IHouseService, HouseService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IReceiptService, ReceiptService>();
 
             #endregion
 

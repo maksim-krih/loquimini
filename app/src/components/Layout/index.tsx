@@ -7,7 +7,9 @@ import {
   UserOutlined,
   MoreOutlined,
   HomeOutlined,
-  ApartmentOutlined
+  ApartmentOutlined,
+  ToolOutlined,
+  DollarOutlined
 } from '@ant-design/icons';
 import { IProps } from './types';
 import { useStyles } from './styles';
@@ -57,11 +59,19 @@ const Layout: FC<IProps> = (props: IProps) => {
                 <Menu.Item key="2" icon={<UserOutlined />} onClick={() => history.push(RouterPaths.UserList)}>
                   Users
                 </Menu.Item>
+                <Menu.Item key="3" icon={<ToolOutlined />} onClick={() => history.push(RouterPaths.Triggers)}>
+                  Triggers
+                </Menu.Item>
               </>
             ) : (
-              <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
-                General
-              </Menu.Item>
+              <>
+                <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
+                  General
+                </Menu.Item>
+                <Menu.Item key="2" icon={<DollarOutlined />} onClick={() => history.push(RouterPaths.ReceiptsTotalInfo)}>
+                  Receipts
+                </Menu.Item>
+              </>
             )}
           </Menu>
         </Sider>
