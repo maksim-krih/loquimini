@@ -6,6 +6,7 @@ using Loquimini.ModelDTO.GridDTO;
 using Loquimini.ModelDTO.HouseDTO;
 using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,19 +31,21 @@ namespace Loquimini.API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GridResponseDTO<HouseDTO>))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
         public async Task<IActionResult> GetAllGrid(GridRequestDTO request)
         {
-			var houses = _databaseManager.HouseRepository.Get();
+            var houses = _databaseManager.HouseRepository.Get();
 
             var gridResponse = await request.GenerateGridResponseAsync(houses);
 
             return Ok(gridResponse);
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseDTO))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -56,6 +59,7 @@ namespace Loquimini.API.Controllers
             return Ok(_mapper.Map<HouseDTO>(house));
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseDTO))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -67,6 +71,7 @@ namespace Loquimini.API.Controllers
             return Ok(_mapper.Map<HouseDTO>(house));
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseDTO))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -83,6 +88,7 @@ namespace Loquimini.API.Controllers
             return Ok(_mapper.Map<HouseDTO>(house));
         }
 
+        [Authorize]
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -90,7 +96,11 @@ namespace Loquimini.API.Controllers
         public async Task<IActionResult> DeleteById([FromQuery] Guid id)
         {
             var house = await _databaseManager.HouseRepository
-                .GetByIdAsync(id);
+                .Get(x => x.Id == id)
+                .Include(x => x.Info)
+                .Include(x => x.Flats)
+                    .ThenInclude(x => x.Info)
+                .FirstOrDefaultAsync();
 
             _databaseManager.HouseRepository.Delete(house);
 

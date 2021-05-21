@@ -169,6 +169,31 @@ const General: FC<IProps> = (props: IProps) => {
             >
               <InputNumber disabled={readonly} />
             </FormItem>
+            <Title level={5}>Default Indicators</Title>
+            <FormItem
+              label="Cold Water"
+              name="coldWater"
+            >
+              <InputNumber disabled={readonly} />
+            </FormItem>
+            <FormItem
+              label="Hot Water"
+              name="hotWater"
+            >
+              <InputNumber disabled={readonly} />
+            </FormItem>
+            <FormItem
+              label="Electricity"
+              name="electricity"
+            >
+              <InputNumber disabled={readonly} />
+            </FormItem>
+            <FormItem
+              label="Gas"
+              name="gas"
+            >
+              <InputNumber disabled={readonly} />
+            </FormItem>
           </>
         ) : (
           <>
@@ -176,8 +201,10 @@ const General: FC<IProps> = (props: IProps) => {
             <Form.List name="flats">
               {(fields, { add, remove }) => (
                 <>
-                  {fields.map(({ key, name, fieldKey, ...restField }) => (
+                  {fields.map(({ key, name, fieldKey, ...restField }, index) => (
                     <>
+                      <Title level={5}>#{index + 1}</Title>
+                      <MinusCircleOutlined onClick={() => remove(name)} />
                       <Form.Item
                         {...restField}
                         name={[name, 'number']}
@@ -211,7 +238,31 @@ const General: FC<IProps> = (props: IProps) => {
                       >
                         <InputNumber disabled={readonly} />
                       </Form.Item>
-                      <MinusCircleOutlined onClick={() => remove(name)} />
+                      <Title level={5}>Default Indicators</Title>
+                      <FormItem
+                        label="Cold Water"
+                        name="coldWater"
+                      >
+                        <InputNumber disabled={readonly} />
+                      </FormItem>
+                      <FormItem
+                        label="Hot Water"
+                        name="hotWater"
+                      >
+                        <InputNumber disabled={readonly} />
+                      </FormItem>
+                      <FormItem
+                        label="Electricity"
+                        name="electricity"
+                      >
+                        <InputNumber disabled={readonly} />
+                      </FormItem>
+                      <FormItem
+                        label="Gas"
+                        name="gas"
+                      >
+                        <InputNumber disabled={readonly} />
+                      </FormItem>
                     </>
                   ))}
                   <Form.Item>

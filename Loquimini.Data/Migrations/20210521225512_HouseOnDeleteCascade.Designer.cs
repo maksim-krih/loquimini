@@ -4,14 +4,16 @@ using Loquimini.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Loquimini.Data.Migrations
 {
     [DbContext(typeof(LoquiminiDbContext))]
-    partial class LoquiminiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210521225512_HouseOnDeleteCascade")]
+    partial class HouseOnDeleteCascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -437,8 +439,7 @@ namespace Loquimini.Data.Migrations
                 {
                     b.HasOne("Loquimini.Model.Entities.Flat", "Flat")
                         .WithOne("Info")
-                        .HasForeignKey("Loquimini.Model.Entities.BuildingInfo", "FlatId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Loquimini.Model.Entities.BuildingInfo", "FlatId");
 
                     b.HasOne("Loquimini.Model.Entities.House", "House")
                         .WithOne("Info")

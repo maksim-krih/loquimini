@@ -1,5 +1,6 @@
 ﻿using Loquimini.Common.EntityFrameworkTypeConfigurator;
 using Loquimini.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Loquimini.Data.MapConfigs
@@ -17,7 +18,8 @@ namespace Loquimini.Data.MapConfigs
             entityBuilder
                 .HasOne(x => x.Info)
                 .WithOne(ur => ur.Flat)
-                .HasForeignKey<BuildingInfo>(ur => ur.FlatId);
+                .HasForeignKey<BuildingInfo>(ur => ur.FlatId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             entityBuilder
                 .HasOne(x => x.House)

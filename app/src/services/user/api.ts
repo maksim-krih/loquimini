@@ -1,10 +1,10 @@
-import {BaseApi} from "..";
+import {AuthService, BaseApi} from "..";
 import {CreateUser, GridRequest, GridResponse, IError, User} from "../types";
 import * as Url from "./urls";
 
 class UserApi {
   public getAllGrid = async (model: GridRequest): Promise<GridResponse<User>> => {
-    return BaseApi.post(Url.GetAllGrid, model)
+    return BaseApi.post(Url.GetAllGrid, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("UserApi.getAllGrid: ", e);
@@ -13,7 +13,7 @@ class UserApi {
   };
 
   public getAll = async (): Promise<Array<User>> => {
-    return BaseApi.get(Url.GetAll)
+    return BaseApi.get(Url.GetAll, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("UserApi.getAll: ", e);
@@ -22,7 +22,7 @@ class UserApi {
   };
 
   public create = async (model: CreateUser): Promise<User> => {
-    return BaseApi.post(Url.Create, model)
+    return BaseApi.post(Url.Create, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("UserApi.create: ", e);
@@ -35,7 +35,7 @@ class UserApi {
       id
     };
     
-    return BaseApi.delete(Url.DeleteById, { params })
+    return BaseApi.delete(Url.DeleteById, { params, headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("UserApi.deleteById: ", e);
@@ -44,7 +44,7 @@ class UserApi {
   };
 
   public update = async (model: User): Promise<User> => {
-    return BaseApi.post(Url.Update, model)
+    return BaseApi.post(Url.Update, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("UserApi.update: ", e);
@@ -57,7 +57,7 @@ class UserApi {
       id
     };
 
-    return BaseApi.get(Url.GetById, { params })
+    return BaseApi.get(Url.GetById, { params, headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("UserApi.getById: ", e);

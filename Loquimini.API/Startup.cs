@@ -1,9 +1,15 @@
-﻿using Loquimini.Mapping;
+﻿using Loquimini.Common;
+using Loquimini.Common.Exceptions;
+using Loquimini.Mapping;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Threading.Tasks;
 
 namespace Loquimini.API
 {
@@ -20,17 +26,49 @@ namespace Loquimini.API
         {
             services.RegisterServices(Configuration);
 
-            services.AddCors(options =>
+            var tokenValidationParameters = new TokenValidationParameters
             {
-                options.AddDefaultPolicy(
-                    builder =>
+                ValidateIssuer = bool.Parse(Configuration["ValidationToken:ValidateIssuer"]),
+                ValidateAudience = bool.Parse(Configuration["ValidationToken:ValidateAudience"]),
+                RequireSignedTokens = bool.Parse(Configuration["ValidationToken:RequireSignedTokens"]),
+                ValidateIssuerSigningKey = bool.Parse(Configuration["ValidationToken:ValidateIssuerSigningKey"]),
+                RequireExpirationTime = bool.Parse(Configuration["ValidationToken:RequireExpirationTime"]),
+                ValidateLifetime = bool.Parse(Configuration["ValidationToken:ValidateLifetime"]),
+                ClockSkew = TimeSpan.Zero
+            };
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(configureOptions =>
+            {
+                configureOptions.ClaimsIssuer = "webApi";
+                configureOptions.TokenValidationParameters = tokenValidationParameters;
+                configureOptions.SaveToken = true;
+                configureOptions.SecurityTokenValidators.Clear();
+                configureOptions.SecurityTokenValidators.Add(new TokenValidator(services.BuildServiceProvider()));
+
+                configureOptions.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
                     {
-                        builder
-                            .AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
+                        if (context.Exception.GetType() == typeof(UnauthorizedException))
+                        {
+                            var exception = context.Exception as UnauthorizedException;
+                            context.Response.Headers.Add("Token-Expired", "true");
+                            context.Response.Headers.Add("Token-Error-Type", exception.Type.ToString());
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                };
             });
+
+            services.AddCors();
+
+            services.AddMvc();
 
             MapperInstaller.Initialize();
 
@@ -48,12 +86,14 @@ namespace Loquimini.API
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 
-            app.UseCors();
-
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

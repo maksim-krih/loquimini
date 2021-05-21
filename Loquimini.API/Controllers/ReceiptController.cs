@@ -7,6 +7,7 @@ using Loquimini.ModelDTO.HouseDTO;
 using Loquimini.ModelDTO.ReceiptDTO;
 using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,7 @@ namespace Loquimini.API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GridResponseDTO<ReceiptGridDTO>))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -47,6 +49,7 @@ namespace Loquimini.API.Controllers
             return Ok(gridResponse);
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]

@@ -5,6 +5,7 @@ using Loquimini.Model.Entities;
 using Loquimini.ModelDTO.UserDTO;
 using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace Loquimini.API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RoleDTO))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]

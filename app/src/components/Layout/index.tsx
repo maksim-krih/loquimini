@@ -91,9 +91,11 @@ const Layout: FC<IProps> = (props: IProps) => {
             </div>
           </Header>
           <Content
-            className={classes.content}
+            className={classes.contentContainer}
           >
-            {props.children}
+            <div className={classes.content}>
+              {props.children}
+            </div>
           </Content>
         </AntLayout>
       </AntLayout>

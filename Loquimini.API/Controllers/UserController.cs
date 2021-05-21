@@ -6,11 +6,13 @@ using Loquimini.ModelDTO.GridDTO;
 using Loquimini.ModelDTO.UserDTO;
 using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Loquimini.API.Controllers
@@ -34,6 +36,7 @@ namespace Loquimini.API.Controllers
             _userService = userService;
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GridResponseDTO<UserDTO>))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -47,17 +50,19 @@ namespace Loquimini.API.Controllers
             return Ok(gridResponse);
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<UserDTO>))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
         public async Task<IActionResult> GetAll()
         {
-            var users = _databaseManager.UserRepository.Get().ToListAsync();
+            var users = await _databaseManager.UserRepository.Get(x => x.UserRoles.Any(x => x.Role.Name == "User")).ToListAsync();
 
-            return Ok(users);
+            return Ok(_mapper.Map<ICollection<UserDTO>>(users));
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDTO))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -71,6 +76,7 @@ namespace Loquimini.API.Controllers
             return Ok(_mapper.Map<UserDTO>(user));
         }
 
+        [Authorize]
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -85,6 +91,7 @@ namespace Loquimini.API.Controllers
             return Ok(true);
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDTO))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
@@ -96,6 +103,7 @@ namespace Loquimini.API.Controllers
             return Ok(_mapper.Map<UserDTO>(user));
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDTO))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]

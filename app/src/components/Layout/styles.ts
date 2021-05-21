@@ -31,10 +31,14 @@ export const useStyles = createUseStyles({
     display: "flex",
     justifyContent: "space-between"
   },
+  contentContainer: {
+    overflow: "auto",
+    height: 0,
+    minHeight: 280,
+  },
   content: {
     margin: '24px 16px',
     padding: 24,
-    minHeight: 280,
   },
   layoutContainer: {
     minHeight: '100vh'

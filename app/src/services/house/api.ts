@@ -1,10 +1,10 @@
-import {BaseApi} from "..";
+import {AuthService, BaseApi} from "..";
 import {CreateHouse, GridRequest, GridResponse, House, IError} from "../types";
 import * as Url from "./urls";
 
 class HouseApi {
   public getAllGrid = async (model: GridRequest): Promise<GridResponse<House>> => {
-    return BaseApi.post(Url.GetAllGrid, model)
+    return BaseApi.post(Url.GetAllGrid, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("HouseApi.getAllGrid: ", e);
@@ -13,7 +13,7 @@ class HouseApi {
   };
 
   public create = async (model: CreateHouse): Promise<House> => {
-    return BaseApi.post(Url.Create, model)
+    return BaseApi.post(Url.Create, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("HouseApi.create: ", e);
@@ -22,7 +22,7 @@ class HouseApi {
   };
 
   public update = async (model: House): Promise<House> => {
-    return BaseApi.post(Url.Update, model)
+    return BaseApi.post(Url.Update, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("HouseApi.update: ", e);
@@ -35,7 +35,7 @@ class HouseApi {
       id
     };
 
-    return BaseApi.get(Url.GetById, { params })
+    return BaseApi.get(Url.GetById, { params, headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("HouseApi.getById: ", e);
@@ -48,7 +48,7 @@ class HouseApi {
       id
     };
     
-    return BaseApi.delete(Url.DeleteById, { params })
+    return BaseApi.delete(Url.DeleteById, { params, headers: { Authorization: `Bearer ${AuthService.Token}` } })
       .then((response: any) => response.data)
       .catch((e: IError) => {
         console.log("HouseApi.deleteById: ", e);

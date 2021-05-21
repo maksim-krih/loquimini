@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import {
   BrowserRouter,
   Switch,
@@ -12,6 +11,7 @@ import { Layout } from "./components";
 import UserGeneral from "./pages/User/General";
 import { HouseList } from "./pages/House";
 import HouseGeneral from "./pages/House/General";
+import Triggers from "./pages/Triggers";
 
 const PrivateRoute = onlyAuth(RouterPaths.Login)(Route);
 
@@ -60,6 +60,12 @@ const Router = () => {
         <PrivateRoute path={RouterPaths.GeneralUserTemplate} exact>
           <Layout>
             <UserGeneral />
+          </Layout>
+        </PrivateRoute>
+
+        <PrivateRoute path={RouterPaths.Triggers} exact>
+          <Layout>
+            <Triggers />
           </Layout>
         </PrivateRoute>
       </Switch>
