@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
-import { CreateHouse, House, User } from "../../../services/types";
+import { CreateHouse, Flat, House, User } from "../../../services/types";
 import Api from "../../../services";
 import { Button, Form, Input, InputNumber, Select, Typography } from "antd";
 import { useHistory, useParams } from "react-router-dom";
 import { RouterPaths, validateMessages } from "../../../consts";
-import { HouseType, HouseTypeSelect } from "../../../enums";
+import { HouseType, HouseTypeSelect, ReceiptType } from "../../../enums";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useToggle } from "ahooks";
 
@@ -49,6 +49,23 @@ const General: FC<IProps> = (props: IProps) => {
   const getHouse = () => {
     Api.House.getById(id)
     .then((response: House) => {
+      const model = response as any;
+      
+      if (model.type === HouseType.Private) {
+        model.coldWater = response.info!.defaultIndicators.find(x => x.type === ReceiptType.ColdWater)?.value;
+        model.hotWater = response.info!.defaultIndicators.find(x => x.type === ReceiptType.HotWater)?.value;
+        model.gas = response.info!.defaultIndicators.find(x => x.type === ReceiptType.Gas)?.value;
+        model.electricity = response.info!.defaultIndicators.find(x => x.type === ReceiptType.Electricity)?.value;
+      }
+      else if (model.type === HouseType.Apartment) {
+        model.flats.forEach((x: any, index: number) => {
+          x.coldWater = response.flats[index].info.defaultIndicators.find(x => x.type === ReceiptType.ColdWater)?.value;
+          x.hotWater = response.flats[index].info.defaultIndicators.find(x => x.type === ReceiptType.HotWater)?.value;
+          x.gas = response.flats[index].info.defaultIndicators.find(x => x.type === ReceiptType.Gas)?.value;
+          x.electricity = response.flats[index].info.defaultIndicators.find(x => x.type === ReceiptType.Electricity)?.value;
+        })
+      }
+
       setData(response);
       setHouseType(response.type);
       form.resetFields();
@@ -70,6 +87,49 @@ const General: FC<IProps> = (props: IProps) => {
     if(isCreate) {
       const model = values as CreateHouse;
 
+      if (model.type === HouseType.Private) {
+        model.info!.defaultIndicators = [
+          {
+            type: ReceiptType.ColdWater,
+            value: values.coldWater
+          },
+          {
+            type: ReceiptType.HotWater,
+            value: values.hotWater
+          },
+          {
+            type: ReceiptType.Gas,
+            value: values.gas
+          },
+          {
+            type: ReceiptType.Electricity,
+            value: values.electricity
+          }
+        ];
+      }
+      else if (model.type === HouseType.Apartment) {
+        model.flats.forEach((x: Flat, index: number) => {
+          x.info.defaultIndicators = [
+            {
+              type: ReceiptType.ColdWater,
+              value: values.flats[index].coldWater
+            },
+            {
+              type: ReceiptType.HotWater,
+              value: values.flats[index].hotWater
+            },
+            {
+              type: ReceiptType.Gas,
+              value: values.flats[index].gas
+            },
+            {
+              type: ReceiptType.Electricity,
+              value: values.flats[index].electricity
+            }
+          ]
+        })
+      }
+      
       Api.House.create(model)
       .then(() => {
         history.push(RouterPaths.HouseList);
@@ -174,25 +234,25 @@ const General: FC<IProps> = (props: IProps) => {
               label="Cold Water"
               name="coldWater"
             >
-              <InputNumber disabled={readonly} />
+              <InputNumber disabled={readonly || !isCreate} />
             </FormItem>
             <FormItem
               label="Hot Water"
               name="hotWater"
             >
-              <InputNumber disabled={readonly} />
+              <InputNumber disabled={readonly || !isCreate} />
             </FormItem>
             <FormItem
               label="Electricity"
               name="electricity"
             >
-              <InputNumber disabled={readonly} />
+              <InputNumber disabled={readonly || !isCreate} />
             </FormItem>
             <FormItem
               label="Gas"
               name="gas"
             >
-              <InputNumber disabled={readonly} />
+              <InputNumber disabled={readonly || !isCreate} />
             </FormItem>
           </>
         ) : (
@@ -240,28 +300,36 @@ const General: FC<IProps> = (props: IProps) => {
                       </Form.Item>
                       <Title level={5}>Default Indicators</Title>
                       <FormItem
+                        {...restField}
+                        name={[name, 'coldWater']}
+                        fieldKey={[fieldKey, 'coldWater']}
                         label="Cold Water"
-                        name="coldWater"
                       >
-                        <InputNumber disabled={readonly} />
+                        <InputNumber disabled={readonly || !isCreate} />
                       </FormItem>
                       <FormItem
+                        {...restField}
+                        name={[name, 'hotWater']}
+                        fieldKey={[fieldKey, 'hotWater']}
                         label="Hot Water"
-                        name="hotWater"
                       >
-                        <InputNumber disabled={readonly} />
+                        <InputNumber disabled={readonly || !isCreate} />
                       </FormItem>
                       <FormItem
+                        {...restField}
+                        name={[name, 'electricity']}
+                        fieldKey={[fieldKey, 'electricity']}
                         label="Electricity"
-                        name="electricity"
                       >
-                        <InputNumber disabled={readonly} />
+                        <InputNumber disabled={readonly || !isCreate} />
                       </FormItem>
                       <FormItem
+                        {...restField}
+                        name={[name, 'gas']}
+                        fieldKey={[fieldKey, 'gas']}
                         label="Gas"
-                        name="gas"
                       >
-                        <InputNumber disabled={readonly} />
+                        <InputNumber disabled={readonly || !isCreate} />
                       </FormItem>
                     </>
                   ))}

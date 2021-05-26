@@ -7,15 +7,15 @@ using System.Collections.Generic;
 
 namespace Loquimini.ModelDTO.HouseDTO
 {
-    public class BuildingInfoDTO: IProfileBase
+    public class DefaultIndicatorDTO: IProfileBase
     {
-        public double Area { get; set; }
-        
-        public List<DefaultIndicatorDTO> DefaultIndicators { get; set; }
+        public ReceiptType Type { get; set; }
+
+        public int Value { get; set; }
 
         public IProfileExpression Configure(IProfileExpression config)
         {
-            config.CreateMap<BuildingInfo, BuildingInfoDTO>()
+            config.CreateMap<DefaultIndicator, DefaultIndicatorDTO>()
                 .ReverseMap();
 
             return config;

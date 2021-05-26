@@ -1,4 +1,4 @@
-import { HouseType } from "../enums";
+import { HouseType, ReceiptType } from "../enums";
 
 export interface CredentialsInfo {
   firstName: string;
@@ -85,6 +85,12 @@ export interface Flat {
 
 export interface BuildingInfo {
   area: number;
+  defaultIndicators: Array<DefaultIndicator>;
+}
+
+export interface DefaultIndicator {
+  type: ReceiptType;
+  value: number;
 }
 
 export interface CreateUser {

@@ -82,7 +82,9 @@ namespace Loquimini.API.Controllers
                 .Get(x => x.Id == id)
                 .Include(x => x.Flats)
                     .ThenInclude(x => x.Info)
+                    .ThenInclude(x => x.DefaultIndicators)
                 .Include(x => x.Info)
+                    .ThenInclude(x => x.DefaultIndicators)
                 .FirstOrDefaultAsync();
 
             return Ok(_mapper.Map<HouseDTO>(house));

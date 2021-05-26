@@ -20,7 +20,7 @@ export const BaseApi = axios.create({
 BaseApi.interceptors.response.use(response => {
   return response;
   }, error => {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       AuthService.SignOut();
       window.location.replace(RouterPaths.Login);
     }
