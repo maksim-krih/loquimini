@@ -22,9 +22,9 @@ export const ReceiptTypeLabel = (type: ReceiptType) => {
     case ReceiptType.Intercom:
       return "Intercom";
     case ReceiptType.HotWater:
-      return "HotWater";
+      return "Hot Water";
     case ReceiptType.ColdWater:
-      return "ColdWater";
+      return "Cold Water";
     case ReceiptType.Sewerage:
       return "Sewerage";
   }

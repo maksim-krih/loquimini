@@ -14,6 +14,7 @@ import {
   ReceiptTypeLabel 
 } from "../../enums";
 import FillModal from "./fillModal";
+import PayModal from "./payModal";
 
 const { Link } = Typography;
 
@@ -21,6 +22,7 @@ const Receipts: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [fillModalVisible, setFillModalVisible] = useState(false);
+  const [payModalVisible, setPayModalVisible] = useState(false);
   const [receiptId, setReceiptId] = useState("");
   const [pager, setPager] = useState(DefaultPager);
   const [loading, setLoading] = useState(false);
@@ -77,10 +79,24 @@ const Receipts: FC<IProps> = (props: IProps) => {
     {
       title: 'Old Indicator',
       dataIndex: 'oldIndicator',
+      render: (oldIndicator: number, record: Receipt) => {
+        return record.type === ReceiptType.ColdWater ||
+          record.type === ReceiptType.Electricity ||
+          record.type === ReceiptType.HotWater ||
+          record.type === ReceiptType.Gas
+        ? oldIndicator : "—";
+      }
     },
     {
       title: 'New Indicator',
       dataIndex: 'newIndicator',
+      render: (newIndicator: number, record: Receipt) => {
+        return record.type === ReceiptType.ColdWater ||
+          record.type === ReceiptType.Electricity ||
+          record.type === ReceiptType.HotWater ||
+          record.type === ReceiptType.Gas
+        ? newIndicator : "—";
+      }
     },
     {
       title: 'Rate',
@@ -115,14 +131,15 @@ const Receipts: FC<IProps> = (props: IProps) => {
           case ReceiptStatus.Filled:
             return (
               <Link onClick={(e) => {
-              
+                setReceiptId(record.id);
+                setPayModalVisible(true);
               }}>
                 Pay
               </Link>
             );
         }
-      }
-    },
+      },
+    }
   ];
 
   useEffect(() => {
@@ -156,6 +173,10 @@ const Receipts: FC<IProps> = (props: IProps) => {
     setFillModalVisible(false);
   };
 
+  const payModalCancel = () => {
+    setPayModalVisible(false);
+  };
+
   return (
     <div className={classes.container}>
       {fillModalVisible && (
@@ -163,6 +184,15 @@ const Receipts: FC<IProps> = (props: IProps) => {
           visible={fillModalVisible} 
           onCancel={fillModalCancel}
           receiptId={receiptId}
+          reloadGrid={() => getReceiptsData(pager)}
+        />
+      )}
+      {payModalVisible && (
+        <PayModal 
+          visible={payModalVisible} 
+          onCancel={payModalCancel}
+          receiptId={receiptId}
+          reloadGrid={() => getReceiptsData(pager)}
         />
       )}
       <Table

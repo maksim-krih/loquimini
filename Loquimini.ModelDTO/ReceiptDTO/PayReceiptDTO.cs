@@ -2,10 +2,10 @@
 
 namespace Loquimini.ModelDTO.ReceiptDTO
 {
-    public class FillReceiptDTO
+    public class PayReceiptDTO
     {
         public Guid ReceiptId { get; set; }
 
-        public int NewIndicator { get; set; }
+        public int Value { get; set; }
     }
 }

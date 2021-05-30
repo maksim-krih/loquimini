@@ -130,6 +130,11 @@ export interface Receipt {
 }
 
 export interface FillReceipt {
-  ReceiptId: string;
+  receiptId: string;
   newIndicator: number;
+}
+
+export interface PayReceipt {
+  receiptId: string;
+  value: number;
 }

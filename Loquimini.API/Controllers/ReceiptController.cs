@@ -58,5 +58,29 @@ namespace Loquimini.API.Controllers
 
 			return Ok(result);
         }
+
+        [Authorize]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
+        public async Task<IActionResult> FillReceipt([FromBody]FillReceiptDTO fillReceiptDTO)
+        {
+            var result = await _receiptService.FillReceipt(fillReceiptDTO);
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
+        public async Task<IActionResult> PayReceipt([FromBody]PayReceiptDTO payReceiptDTO)
+        {
+            var result = await _receiptService.PayReceipt(payReceiptDTO);
+
+            return Ok(result);
+        }
     }
 }

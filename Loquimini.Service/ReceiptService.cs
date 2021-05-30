@@ -2,6 +2,7 @@
 using Loquimini.Common.Enums;
 using Loquimini.Manager.Interfaces;
 using Loquimini.Model.Entities;
+using Loquimini.ModelDTO.ReceiptDTO;
 using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -97,6 +98,54 @@ namespace Loquimini.Service
             return userReceipts;
         }
 
+        public async Task<bool> FillReceipt(FillReceiptDTO fillReceiptDTO)
+        {
+            var receipt = await _databaseManager.ReceiptRepository.Get(x =>
+                    x.Id == fillReceiptDTO.ReceiptId
+                )
+                .FirstOrDefaultAsync();
+
+            var lastReceipt = await _databaseManager.ReceiptRepository
+                .Get(x => (x.HouseId == receipt.HouseId || x.FlatId == receipt.FlatId) && x.Type == receipt.Type)
+                .OrderByDescending(x => x.CreatedDate)
+                .Skip(1)
+                .FirstOrDefaultAsync();
+
+            receipt.NewIndicator = fillReceiptDTO.NewIndicator;
+            receipt.Status = ReceiptStatus.Filled;
+            receipt.Total = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid + Convert.ToDecimal(receipt.Rate * (receipt.NewIndicator - receipt.OldIndicator)) : 
+                Convert.ToDecimal(receipt.Rate * (receipt.NewIndicator - receipt.OldIndicator));
+
+            _databaseManager.ReceiptRepository.Update(receipt);
+
+            await _databaseManager.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> PayReceipt(PayReceiptDTO payReceiptDTO)
+        {
+            var receipt = await _databaseManager.ReceiptRepository.Get(x =>
+                    x.Id == payReceiptDTO.ReceiptId
+                )
+                .FirstOrDefaultAsync();
+
+            var lastReceipt = await _databaseManager.ReceiptRepository
+                .Get(x => (x.HouseId == receipt.HouseId || x.FlatId == receipt.FlatId) && x.Type == receipt.Type)
+                .OrderByDescending(x => x.CreatedDate)
+                .Skip(1)
+                .FirstOrDefaultAsync();
+
+            receipt.Paid = payReceiptDTO.Value;
+            receipt.Status = ReceiptStatus.Paid;
+
+            _databaseManager.ReceiptRepository.Update(receipt);
+
+            await _databaseManager.SaveChangesAsync();
+
+            return true;
+        }
+
         private async Task CreateReceiptByType(Guid currentUserId, ICollection<DefaultIndicator> defaultIndicators, ReceiptType receiptType, Guid? houseId = null, Guid? flatId = null, double? area = null)
         {
             switch (receiptType)
@@ -146,7 +195,6 @@ namespace Loquimini.Service
                 .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.ColdWater)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
-
 
             var receipt = new Receipt
             {
@@ -206,7 +254,7 @@ namespace Loquimini.Service
                 FlatId = flatId,
                 Type = ReceiptType.Garbage,
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
-                Status = ReceiptStatus.Created,
+                Status = ReceiptStatus.Filled,
                 Rate = garbageRate,
                 Total = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid + Convert.ToDecimal(garbageRate) : Convert.ToDecimal(garbageRate)
             };
@@ -281,7 +329,7 @@ namespace Loquimini.Service
                 FlatId = flatId,
                 Type = ReceiptType.Intercom,
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
-                Status = ReceiptStatus.Created,
+                Status = ReceiptStatus.Filled,
                 Rate = intercomRate,
                 Total = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid + Convert.ToDecimal(intercomRate) : Convert.ToDecimal(intercomRate)
             };
@@ -306,7 +354,7 @@ namespace Loquimini.Service
                 FlatId = flatId,
                 Type = ReceiptType.Rent,
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
-                Status = ReceiptStatus.Created,
+                Status = ReceiptStatus.Filled,
                 Rate = rentRate,
                 Total = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid + Convert.ToDecimal(rentRate * area) : Convert.ToDecimal(rentRate * area)
             };
@@ -331,7 +379,7 @@ namespace Loquimini.Service
                 FlatId = flatId,
                 Type = ReceiptType.Sewerage,
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
-                Status = ReceiptStatus.Created,
+                Status = ReceiptStatus.Filled,
                 Rate = sewerageRate,
                 Total = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid + Convert.ToDecimal(sewerageRate) : Convert.ToDecimal(sewerageRate)
             };

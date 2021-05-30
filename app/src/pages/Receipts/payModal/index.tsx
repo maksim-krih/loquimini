@@ -4,14 +4,14 @@ import { useStyles } from "./styles";
 import { InputNumber, Modal } from "antd";
 import Api from "../../../services";
 
-const FillModal: FC<IProps> = (props: IProps) => {
+const PayModal: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const { visible, onCancel, receiptId, reloadGrid } = props;
   const [value, setValue] = useState<number | undefined>(undefined);
 
   const handleOk = () => {
-    Api.Receipt.fillReceipt({
-      newIndicator: value!,
+    Api.Receipt.payReceipt({
+      value: value!,
       receiptId
     })
     .then((response: any) => {
@@ -29,7 +29,7 @@ const FillModal: FC<IProps> = (props: IProps) => {
 
   return (
     <Modal 
-      title="Fill Receipt" 
+      title="Pay Receipt" 
       visible={visible} 
       onOk={handleOk} 
       onCancel={onCancel}
@@ -39,4 +39,4 @@ const FillModal: FC<IProps> = (props: IProps) => {
   );
 }
 
-export default FillModal;
+export default PayModal;

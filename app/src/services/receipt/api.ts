@@ -1,5 +1,5 @@
 import {AuthService, BaseApi} from "..";
-import {CreateHouse, GridRequest, GridResponse, House, IError, Receipt} from "../types";
+import {CreateHouse, FillReceipt, GridRequest, GridResponse, House, IError, PayReceipt, Receipt} from "../types";
 import * as Url from "./urls";
 
 class ReceiptApi {
@@ -21,6 +21,23 @@ class ReceiptApi {
       });
   };
 
+  public fillReceipt = async (model: FillReceipt): Promise<boolean> => {
+    return BaseApi.post(Url.FillReceipt, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
+      .then((response: any) => response.data)
+      .catch((e: IError) => {
+        console.log("ReceiptApi.fillReceipt: ", e);
+        throw e;
+      });
+  };
+
+  public payReceipt = async (model: PayReceipt): Promise<boolean> => {
+    return BaseApi.post(Url.PayReceipt, model, { headers: { Authorization: `Bearer ${AuthService.Token}` } })
+      .then((response: any) => response.data)
+      .catch((e: IError) => {
+        console.log("ReceiptApi.payReceipt: ", e);
+        throw e;
+      });
+  };
 }
 
 export default ReceiptApi;
