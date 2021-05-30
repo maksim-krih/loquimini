@@ -34,10 +34,10 @@ namespace Loquimini.ModelDTO.GridDTO
             ApplySorting(ref collection);
             ApplySearching(ref collection);
 
-            var total = await collection.CountAsync();
+            var total = collection.Count();
             collection = collection.Skip(Pager.PageSize * (Pager.Current - 1)).Take(Pager.PageSize);
 
-            return new GridResponseDTO<TData> { Data = await collection.ToListAsync(), Total = total };
+            return new GridResponseDTO<TData> { Data = collection.ToList(), Total = total };
         }
 
         public void ApplySearching<TEntity>(ref IQueryable<TEntity> collection)

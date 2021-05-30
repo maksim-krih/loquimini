@@ -5,6 +5,5 @@
         Created,
         Filled,
         Paid,
-        NotPaid
     }
 }

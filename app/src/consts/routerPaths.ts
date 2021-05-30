@@ -10,7 +10,7 @@ class RouterPaths {
   public static GeneralUserTemplate = "/user/:id";
   public static GeneralUser = (id: string) => `/user/${id}`;
   public static Triggers = "/triggers";
-  public static ReceiptsTotalInfo = "/total-info";
+  public static Receipts = "/receipts";
 }
 
 export default RouterPaths;

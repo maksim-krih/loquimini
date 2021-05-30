@@ -90,9 +90,11 @@ const List: FC<IProps> = (props: IProps) => {
 
   return (
     <div className={classes.container}>
-      <Button onClick={onCreate}>
-        Create
-      </Button>
+      <div className={classes.actionButtons}>
+        <Button onClick={onCreate}>
+          Create
+        </Button>
+      </div>
       <Table
         columns={columns}
         rowKey={(record: House) => record.id}

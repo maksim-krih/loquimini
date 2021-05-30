@@ -82,19 +82,19 @@ namespace Loquimini.Service
             {
                 var flatReceipts = receipts.Where(x => x.FlatId == flat.Id);
 
-                receipts.AddRange(flatReceipts);
+                userReceipts.AddRange(flatReceipts);
             }
 
             foreach (var house in user.Houses)
             {
                 var houseReceipts = receipts.Where(x => x.HouseId == house.Id);
 
-                receipts.AddRange(houseReceipts);
+                userReceipts.AddRange(houseReceipts);
             }
 
-            receipts = receipts.OrderByDescending(x => x.CreatedDate).ToList();
+            userReceipts = userReceipts.OrderByDescending(x => x.CreatedDate).ToList();
 
-            return receipts;
+            return userReceipts;
         }
 
         private async Task CreateReceiptByType(Guid currentUserId, ICollection<DefaultIndicator> defaultIndicators, ReceiptType receiptType, Guid? houseId = null, Guid? flatId = null, double? area = null)
@@ -158,7 +158,7 @@ namespace Loquimini.Service
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
                 Status = ReceiptStatus.Created,
                 Rate = coldWaterRate,
-                OldIndicator = lastReceipt?.NewIndictor ?? defaultIndicatorValue
+                OldIndicator = lastReceipt?.NewIndicator ?? defaultIndicatorValue
             };
 
             await _databaseManager.ReceiptRepository.CreateAsync(receipt);
@@ -183,7 +183,7 @@ namespace Loquimini.Service
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
                 Status = ReceiptStatus.Created,
                 Rate = electricityRate,
-                OldIndicator = lastReceipt?.NewIndictor ?? defaultIndicatorValue
+                OldIndicator = lastReceipt?.NewIndicator ?? defaultIndicatorValue
             };
 
             await _databaseManager.ReceiptRepository.CreateAsync(receipt);
@@ -233,7 +233,7 @@ namespace Loquimini.Service
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
                 Status = ReceiptStatus.Created,
                 Rate = gasRate,
-                OldIndicator = lastReceipt?.NewIndictor ?? defaultIndicatorValue
+                OldIndicator = lastReceipt?.NewIndicator ?? defaultIndicatorValue
             };
 
             await _databaseManager.ReceiptRepository.CreateAsync(receipt);
@@ -258,7 +258,7 @@ namespace Loquimini.Service
                 Debt = lastReceipt != null ? lastReceipt.Total - lastReceipt.Paid : 0,
                 Status = ReceiptStatus.Created,
                 Rate = hotWaterRate,
-                OldIndicator = lastReceipt?.NewIndictor ?? defaultIndicatorValue
+                OldIndicator = lastReceipt?.NewIndicator ?? defaultIndicatorValue
             };
 
             await _databaseManager.ReceiptRepository.CreateAsync(receipt);

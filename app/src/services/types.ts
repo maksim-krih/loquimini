@@ -1,4 +1,4 @@
-import { HouseType, ReceiptType } from "../enums";
+import { HouseType, ReceiptStatus, ReceiptType } from "../enums";
 
 export interface CredentialsInfo {
   firstName: string;
@@ -78,6 +78,9 @@ export interface House {
 
 export interface Flat {
   id: string;
+  houseId: string;
+  houseNumber: string;
+  street: string;
   number: string;
   info: BuildingInfo;
   userId: string;
@@ -108,4 +111,25 @@ export interface CreateHouse {
   userId?: string;
   info?: BuildingInfo;
   flats: Array<Flat>;
+}
+
+export interface Receipt {
+  id: string;
+  type: ReceiptType;
+  status: ReceiptStatus;
+  rate: number;
+  oldIndicator: number;
+  newIndictor: number;
+  total: number;
+  paid: number;
+  debt: number;
+  date: Date;
+  house: House;
+  flat: Flat;
+  houseType: HouseType;
+}
+
+export interface FillReceipt {
+  ReceiptId: string;
+  newIndicator: number;
 }

@@ -3,7 +3,7 @@ using Loquimini.Common.Enums;
 using Loquimini.Mapping;
 using Loquimini.Model.Entities;
 using System;
-using System.Collections.Generic;
+using Loquimini.ModelDTO.HouseDTO;
 
 namespace Loquimini.ModelDTO.ReceiptDTO
 {
@@ -19,7 +19,7 @@ namespace Loquimini.ModelDTO.ReceiptDTO
 
         public int? OldIndicator { get; set; }
 
-        public int? NewIndictor { get; set; }
+        public int? NewIndicator { get; set; }
 
         public decimal Total { get; set; }
 
@@ -27,13 +27,19 @@ namespace Loquimini.ModelDTO.ReceiptDTO
 
         public decimal Debt { get; set; }
 
-        public virtual House House { get; set; }
+        public DateTime Date { get; set; }
 
-        public virtual Flat Flat { get; set; }
+        public HouseType HouseType { get; set; }
+
+        public HouseDTO.HouseDTO House { get; set; }
+
+        public FlatDTO Flat { get; set; }
 
         public IProfileExpression Configure(IProfileExpression config)
         {
             config.CreateMap<Receipt, ReceiptGridDTO>()
+                .ForMember(x => x.Date, cfg => cfg.MapFrom(m => m.CreatedDate))
+                .ForMember(x => x.HouseType, cfg => cfg.MapFrom(m => m.House != null ? HouseType.Private : HouseType.Apartment))
                 .ReverseMap()
                 .ForMember(x => x.Id, cfg => cfg.Ignore());
 

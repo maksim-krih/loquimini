@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loquimini.Data.Migrations
 {
     [DbContext(typeof(LoquiminiDbContext))]
-    [Migration("20210521225648_FlatOnDeleteCascade")]
-    partial class FlatOnDeleteCascade
+    [Migration("20210530030418_DefaultIndicator_Typo_Fix")]
+    partial class DefaultIndicator_Typo_Fix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,7 +189,7 @@ namespace Loquimini.Data.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("NewIndictor")
+                    b.Property<int?>("NewIndicator")
                         .HasColumnType("int");
 
                     b.Property<int?>("OldIndicator")
@@ -439,13 +439,11 @@ namespace Loquimini.Data.Migrations
                 {
                     b.HasOne("Loquimini.Model.Entities.Flat", "Flat")
                         .WithOne("Info")
-                        .HasForeignKey("Loquimini.Model.Entities.BuildingInfo", "FlatId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Loquimini.Model.Entities.BuildingInfo", "FlatId");
 
                     b.HasOne("Loquimini.Model.Entities.House", "House")
                         .WithOne("Info")
-                        .HasForeignKey("Loquimini.Model.Entities.BuildingInfo", "HouseId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Loquimini.Model.Entities.BuildingInfo", "HouseId");
 
                     b.Navigation("Flat");
 

@@ -13,3 +13,12 @@ export const HouseTypeSelect = [
     value: HouseType.Apartment
   }
 ];
+
+export const HouseTypeLabel = (type: HouseType) => {
+  switch (type) {
+    case HouseType.Private:
+      return "Private";
+    case HouseType.Apartment:
+      return "Apartment";
+  }
+}

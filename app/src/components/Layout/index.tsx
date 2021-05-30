@@ -68,7 +68,7 @@ const Layout: FC<IProps> = (props: IProps) => {
                 <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
                   General
                 </Menu.Item>
-                <Menu.Item key="2" icon={<DollarOutlined />} onClick={() => history.push(RouterPaths.ReceiptsTotalInfo)}>
+                <Menu.Item key="2" icon={<DollarOutlined />} onClick={() => history.push(RouterPaths.Receipts)}>
                   Receipts
                 </Menu.Item>
               </>

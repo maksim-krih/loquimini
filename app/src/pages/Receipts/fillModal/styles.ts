@@ -4,7 +4,5 @@ export const useStyles = createUseStyles({
   container: {
     
   },
-  actionButtons: {
-    marginBottom: 10
-  }
+  
 })

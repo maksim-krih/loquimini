@@ -14,7 +14,7 @@ namespace Loquimini.Model.Entities
         
         public int? OldIndicator { get; set; } 
 
-        public int? NewIndictor { get; set; }
+        public int? NewIndicator { get; set; }
 
         public decimal Total { get; set; }
 

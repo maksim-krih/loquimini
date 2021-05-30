@@ -12,6 +12,7 @@ import UserGeneral from "./pages/User/General";
 import { HouseList } from "./pages/House";
 import HouseGeneral from "./pages/House/General";
 import Triggers from "./pages/Triggers";
+import Receipts from "./pages/Receipts";
 
 const PrivateRoute = onlyAuth(RouterPaths.Login)(Route);
 
@@ -57,9 +58,9 @@ const Router = () => {
           </Layout>
         </PrivateRoute>
 
-        <PrivateRoute path={RouterPaths.GeneralUserTemplate} exact>
+        <PrivateRoute path={RouterPaths.Receipts} exact>
           <Layout>
-            <UserGeneral />
+            <Receipts />
           </Layout>
         </PrivateRoute>
 

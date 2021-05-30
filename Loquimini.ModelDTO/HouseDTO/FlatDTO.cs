@@ -13,6 +13,12 @@ namespace Loquimini.ModelDTO.HouseDTO
 
         public string Number { get; set; }
 
+        public string HouseNumber { get; set; }
+        
+        public string Street { get; set; }
+
+        public Guid HouseId { get; set; }
+
         public Guid? UserId { get; set; }
 
         public BuildingInfoDTO Info { get; set; }
@@ -20,6 +26,8 @@ namespace Loquimini.ModelDTO.HouseDTO
         public IProfileExpression Configure(IProfileExpression config)
         {
             config.CreateMap<Flat, FlatDTO>()
+                .ForMember(x => x.Street, cfg => cfg.MapFrom(m => m.House.Street))
+                .ForMember(x => x.HouseNumber, cfg => cfg.MapFrom(m => m.House.Number))
                 .ReverseMap()
                 .ForMember(x => x.Id, cfg => cfg.Ignore());
 

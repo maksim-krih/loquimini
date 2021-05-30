@@ -100,10 +100,12 @@ namespace Loquimini.API.Controllers
             var house = await _databaseManager.HouseRepository
                 .Get(x => x.Id == id)
                 .Include(x => x.Info)
+                .Include(x => x.Receipts)
                 .Include(x => x.Flats)
                     .ThenInclude(x => x.Info)
                 .FirstOrDefaultAsync();
 
+            await _databaseManager.ReceiptRepository.DeleteRangeAsync(house.Receipts);
             _databaseManager.HouseRepository.Delete(house);
 
             var saved = await _databaseManager.SaveChangesAsync();

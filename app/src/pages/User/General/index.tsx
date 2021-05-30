@@ -74,15 +74,17 @@ const General: FC<IProps> = (props: IProps) => {
 
   return (
     <div className={classes.container}>
-      {isCreate ? (
-        <Button onClick={() => form.submit()}>
-          Create
-        </Button>
-      ) : (
-        <Button onClick={() => isEdit ? form.submit() : toggle()}>
-          Edit
-        </Button>
-      )}
+      <div className={classes.actionButtons}>
+        {isCreate ? (
+          <Button onClick={() => form.submit()}>
+            Create
+          </Button>
+        ) : (
+          <Button onClick={() => isEdit ? form.submit() : toggle()}>
+            Edit
+          </Button>
+        )}
+      </div>
       <Button onClick={onCancel}>
         Cancel
       </Button>

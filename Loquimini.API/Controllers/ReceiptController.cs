@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
 using Loquimini.API.Controllers.Base;
 using Loquimini.Common.Exceptions;
-using Loquimini.Model.Entities;
 using Loquimini.ModelDTO.GridDTO;
-using Loquimini.ModelDTO.HouseDTO;
 using Loquimini.ModelDTO.ReceiptDTO;
 using Loquimini.Repository.UnitOfWork;
 using Loquimini.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,13 +36,13 @@ namespace Loquimini.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GridResponseDTO<ReceiptGridDTO>))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(IInvalidRequestDataStatusError))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(IStatusException))]
-        public async Task<IActionResult> GetByUserIdGrid([FromQuery] Guid id, GridRequestDTO request)
+        public async Task<IActionResult> GetByUserIdGrid([FromQuery] Guid id, [FromBody]GridRequestDTO request)
         {
             var receitps = await _receiptService.GetByUserId(id);
-            
-            var receitpDTOs = _mapper.Map<ReceiptGridDTO>(receitps);
 
-            var gridResponse = await request.GenerateGridResponseAsync(receitps.AsQueryable());
+            var receitpDTOs = _mapper.Map<List<ReceiptGridDTO>>(receitps).AsQueryable();
+
+            var gridResponse = await request.GenerateGridResponseAsync(receitpDTOs);
 
             return Ok(gridResponse);
         }

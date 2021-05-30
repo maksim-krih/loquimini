@@ -47,6 +47,8 @@ namespace Loquimini.Service
             house.Number = houseDTO.Number;
             house.Type = houseDTO.Type;
 
+            house = _databaseManager.HouseRepository.Update(house);
+
             if (houseDTO.Type != house.Type)
             {
                 if (houseDTO.Type == HouseType.Apartment)
@@ -57,6 +59,7 @@ namespace Loquimini.Service
                 {
                     var newInfo = _mapper.Map<BuildingInfo>(houseDTO.Info);
                     newInfo.HouseId = house.Id;
+                    newInfo.House = null;
 
                     await _databaseManager.BuildingInfoRepository.CreateAsync(newInfo);
                 }
@@ -89,12 +92,11 @@ namespace Loquimini.Service
                 {
                     var newFlat = _mapper.Map<Flat>(flat);
                     newFlat.HouseId = house.Id;
+                    newFlat.House = null;
 
                     await _databaseManager.FlatRepository.CreateAsync(newFlat);
                 }
             }
-
-            house = _databaseManager.HouseRepository.Update(house);
 
             _databaseManager.SaveChanges();
 

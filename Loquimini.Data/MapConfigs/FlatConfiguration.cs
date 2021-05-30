@@ -18,8 +18,7 @@ namespace Loquimini.Data.MapConfigs
             entityBuilder
                 .HasOne(x => x.Info)
                 .WithOne(ur => ur.Flat)
-                .HasForeignKey<BuildingInfo>(ur => ur.FlatId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey<BuildingInfo>(ur => ur.FlatId);
 
             entityBuilder
                 .HasOne(x => x.House)
