@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Button, Input } from "antd";
+import { Button, Input, Typography } from "antd";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
 import Api, { AuthService } from "../../services";
@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { RouterPaths } from "../../consts";
 
 const { Password } = Input;
+const { Title } = Typography;
 
 const Login: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
@@ -31,10 +32,18 @@ const Login: FC<IProps> = (props: IProps) => {
 
   return (
     <div className={classes.container}>
-      <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-      <Password value={password} onChange={(e) => setPassword(e.target.value)} />
-      <Button onClick={onLogin}>Sign in</Button>
+      <div className={classes.login}>
+        <Title level={3} style={{color: "#fff", textAlign: "center"}}>Loquimini</Title>
+        <div style={{marginBottom: 10}}></div>
+        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div style={{marginBottom: 10}}></div>
+        <Password value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div style={{marginBottom: 10}}></div>
+
+        <Button onClick={onLogin} style={{ marginLeft: 85}}>Sign in</Button>
+      </div>
     </div>
+    
   );
 }
 

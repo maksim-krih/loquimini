@@ -138,3 +138,12 @@ export interface PayReceipt {
   receiptId: string;
   value: number;
 }
+
+export interface DashboardInfo {
+  totalSum: number;
+  totalDebts: number;
+  currentFilled: number;
+  totalFilled: number;
+  currentPaid: number;
+  totalPaid: number;
+}

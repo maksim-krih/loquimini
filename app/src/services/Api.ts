@@ -3,6 +3,7 @@ import AuthApi from "./auth";
 import HouseApi from "./house";
 import UserApi from "./user";
 import ReceiptApi from "./receipt";
+import DashboardApi from "./dashboard";
 import { AuthService } from ".";
 import { RouterPaths } from "../consts";
 
@@ -42,6 +43,10 @@ class Api {
 
   static get Receipt() {
     return new ReceiptApi();
+  }
+
+  static get Dashboard() {
+    return new DashboardApi();
   }
 }
 

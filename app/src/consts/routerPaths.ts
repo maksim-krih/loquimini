@@ -11,6 +11,7 @@ class RouterPaths {
   public static GeneralUser = (id: string) => `/user/${id}`;
   public static Triggers = "/triggers";
   public static Receipts = "/receipts";
+  public static Dashboard = "/dashboard";
 }
 
 export default RouterPaths;
