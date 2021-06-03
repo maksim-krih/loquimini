@@ -17,6 +17,7 @@ import { Typography } from 'antd';
 import { AuthService } from '../../services';
 import { useHistory } from 'react-router';
 import { RouterPaths } from '../../consts';
+import logoImg from '../../assets/img/logo.png';
 
 const { Title, Text } = Typography;
 const { Header, Sider, Content } = AntLayout;
@@ -48,7 +49,10 @@ const Layout: FC<IProps> = (props: IProps) => {
       <AntLayout className={classes.layoutContainer}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className={classes.logo}>
-          <Title level={3}>{!collapsed ? "Loquimini" : "L"}</Title>
+            <img src={logoImg} alt="logo" style={{ marginRight: 8, filter: "invert(1)" }}/>
+            {!collapsed &&
+              <Title level={3}>Loquimini</Title>
+            }
           </div>
           <Menu theme="dark" mode="inline">
             {AuthService.IsAdmin ? (

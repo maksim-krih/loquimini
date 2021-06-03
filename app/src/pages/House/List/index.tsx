@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
-import { GridPager, GridRequest, House, User } from "../../../services/types";
+import { GridPager, GridRequest, GridSorter, House, User } from "../../../services/types";
 import Api from "../../../services";
 import { Button, Table, TablePaginationConfig, Typography } from "antd";
 import { useHistory } from "react-router";
 import { DefaultGridRequest, DefaultPager, RouterPaths } from "../../../consts";
+import { SorterResult } from "antd/lib/table/interface";
 
 const { Link } = Typography;
 
@@ -20,10 +21,12 @@ const List: FC<IProps> = (props: IProps) => {
     {
       title: 'Street',
       dataIndex: 'street',
+      sorter: true,
     },
     {
       title: 'Number',
       dataIndex: 'number',
+      sorter: true,
     },
     {
       title: '',
@@ -43,10 +46,10 @@ const List: FC<IProps> = (props: IProps) => {
     getHousesData(pager);
   }, []);
 
-  const getHousesData = (pager: GridPager) => {
+  const getHousesData = (pager: GridPager, sorter?: GridSorter) => {
     setLoading(true);
 
-    const request = DefaultGridRequest(pager);
+    const request = DefaultGridRequest(pager, sorter);
 
     Api.House.getAllGrid(request)
     .then((response: any) => {
@@ -61,9 +64,9 @@ const List: FC<IProps> = (props: IProps) => {
     });
   };
 
-  const handleTableChange = (pagination: TablePaginationConfig) => {
-    setPager({...pager, current: pagination.current!});
-    getHousesData({...pager, current: pagination.current!});
+  const handleTableChange = (pagination: TablePaginationConfig, filters: any, sorter: any) => {
+    setPager({...pager, current: pagination.current! });
+    getHousesData({...pager, current: pagination.current!}, sorter);
   };
 
   const onCreate = () => {

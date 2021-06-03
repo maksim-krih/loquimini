@@ -8,8 +8,10 @@ export const useStyles = createUseStyles({
     height: "100%"
   },
   login: {
-    padding: "0 24px",
-    width: 300,
+    backgroundColor: "#fff",
+    padding: "16px 24px",
+    width: 500,
+    borderRadius: "20px",
     margin: "auto",
     marginTop: 300
   }

@@ -15,8 +15,9 @@ export const useStyles = createUseStyles({
   logo: {
     height: 32,
     margin: 16,
-    textAlign: "center",
-    overflow: "hidden",
+    display: "flex",
+    marginLeft: 28,
+    justifyContent: "center",
     "& .ant-typography": {
       color: "#fff"
   }

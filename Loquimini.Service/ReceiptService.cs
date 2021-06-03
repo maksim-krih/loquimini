@@ -75,6 +75,7 @@ namespace Loquimini.Service
             var receipts = await _databaseManager.ReceiptRepository.Get()
                 .Include(x => x.House)
                 .Include(x => x.Flat)
+                    .ThenInclude(x => x.House)
                 .ToListAsync();
 
             var userReceipts = new List<Receipt>();
