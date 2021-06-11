@@ -1,5 +1,7 @@
 import Layout from "./Layout";
+import Table from "./Table";
 
 export { 
-  Layout
+  Layout,
+  Table
 };

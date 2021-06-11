@@ -158,15 +158,25 @@ const General: FC<IProps> = (props: IProps) => {
     <div className={classes.container}>
       <div className={classes.actionButtons}>
         {isCreate ? (
-          <Button onClick={() => form.submit()}>
+          <Button 
+            onClick={() => form.submit()} 
+            className={classes.actionButton} 
+            type="primary" 
+            style={{ marginRight: 5 }}
+          >
             Create
           </Button>
         ) : (
-          <Button onClick={() => isEdit ? form.submit() : toggle()}>
+          <Button 
+            onClick={() => isEdit ? form.submit() : toggle()} 
+            className={classes.actionButton}
+            type="primary" 
+            style={{ marginRight: 5 }}  
+          >
             Edit
           </Button>
         )}
-        <Button onClick={onCancel}>
+        <Button onClick={onCancel} className={classes.actionButton}>
           Cancel
         </Button>
       </div>
@@ -187,7 +197,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="street"
           rules={[{ required: true }]}
         >
-          <Input disabled={readonly}/>
+          <Input disabled={readonly} style={{ borderRadius: 5 }}/>
         </FormItem>
     
         <FormItem
@@ -195,7 +205,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="number"
           rules={[{ required: true }]}
         >
-          <Input disabled={readonly}/>
+          <Input disabled={readonly} style={{ borderRadius: 5 }}/>
         </FormItem>
 
         <FormItem
@@ -207,6 +217,7 @@ const General: FC<IProps> = (props: IProps) => {
             options={HouseTypeSelect}
             onChange={onTypeChange}
             disabled={readonly}
+            style={{ borderRadius: 5 }}
           />
         </FormItem>
         {houseType === HouseType.Private ? (
@@ -222,6 +233,7 @@ const General: FC<IProps> = (props: IProps) => {
                   label: x.email
                 }))}
                 disabled={readonly}
+                style={{ borderRadius: 5 }}
               />
             </FormItem>
             <FormItem
@@ -229,32 +241,32 @@ const General: FC<IProps> = (props: IProps) => {
               name={["info", "area"]}
               rules={[{ required: true }]}
             >
-              <InputNumber disabled={readonly} />
+              <InputNumber disabled={readonly} style={{ borderRadius: 5 }} />
             </FormItem>
             <Title level={5}>Default Indicators</Title>
             <FormItem
               label="Cold Water"
               name="coldWater"
             >
-              <InputNumber disabled={readonly || !isCreate} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
             </FormItem>
             <FormItem
               label="Hot Water"
               name="hotWater"
             >
-              <InputNumber disabled={readonly || !isCreate} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
             </FormItem>
             <FormItem
               label="Electricity"
               name="electricity"
             >
-              <InputNumber disabled={readonly || !isCreate} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
             </FormItem>
             <FormItem
               label="Gas"
               name="gas"
             >
-              <InputNumber disabled={readonly || !isCreate} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
             </FormItem>
           </>
         ) : (
@@ -265,8 +277,10 @@ const General: FC<IProps> = (props: IProps) => {
                 <>
                   {fields.map(({ key, name, fieldKey, ...restField }, index) => (
                     <>
-                      <Title level={5}>#{index + 1}</Title>
-                      <MinusCircleOutlined onClick={() => remove(name)} />
+                      <div style={{ display: "flex" }}>
+                        <Title level={5} style={{ marginRight: 5 }}>#{index + 1}</Title>
+                        <MinusCircleOutlined onClick={() => remove(name)} width={32} style={{ marginTop: 6 }}/>
+                      </div>
                       <Form.Item
                         {...restField}
                         name={[name, 'number']}
@@ -274,7 +288,7 @@ const General: FC<IProps> = (props: IProps) => {
                         label="Number"
                         rules={[{ required: true }]}
                       >
-                        <Input disabled={readonly} />
+                        <Input disabled={readonly} style={{ borderRadius: 5 }} />
                       </Form.Item>
                       <Form.Item
                         {...restField}
@@ -289,6 +303,7 @@ const General: FC<IProps> = (props: IProps) => {
                             label: x.email
                           }))}
                           disabled={readonly}
+                          style={{ borderRadius: 5 }}
                         />
                       </Form.Item>
                       <Form.Item
@@ -298,7 +313,7 @@ const General: FC<IProps> = (props: IProps) => {
                         label="Area"
                         rules={[{ required: true }]}
                       >
-                        <InputNumber disabled={readonly} />
+                        <InputNumber disabled={readonly} style={{ borderRadius: 5 }} />
                       </Form.Item>
                       <Title level={5}>Default Indicators</Title>
                       <FormItem
@@ -307,7 +322,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'coldWater']}
                         label="Cold Water"
                       >
-                        <InputNumber disabled={readonly || !isCreate} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
                       </FormItem>
                       <FormItem
                         {...restField}
@@ -315,7 +330,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'hotWater']}
                         label="Hot Water"
                       >
-                        <InputNumber disabled={readonly || !isCreate} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
                       </FormItem>
                       <FormItem
                         {...restField}
@@ -323,7 +338,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'electricity']}
                         label="Electricity"
                       >
-                        <InputNumber disabled={readonly || !isCreate} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
                       </FormItem>
                       <FormItem
                         {...restField}
@@ -331,7 +346,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'gas']}
                         label="Gas"
                       >
-                        <InputNumber disabled={readonly || !isCreate} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
                       </FormItem>
                     </>
                   ))}

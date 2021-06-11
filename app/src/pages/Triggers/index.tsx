@@ -22,7 +22,7 @@ const Trigger: FC<IProps> = (props: IProps) => {
 
   return (
     <div className={classes.container}>
-      <Button onClick={generateReceipts}>Generate Receipts</Button>
+      <Button onClick={generateReceipts} style={{ borderRadius: 5 }} type="primary">Generate Receipts</Button>
     </div>
   );
 }

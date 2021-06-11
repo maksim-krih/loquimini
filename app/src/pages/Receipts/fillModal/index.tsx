@@ -34,7 +34,7 @@ const FillModal: FC<IProps> = (props: IProps) => {
       onOk={handleOk} 
       onCancel={onCancel}
     >
-      <InputNumber value={value} onChange={onChange}/>
+      <InputNumber value={value} onChange={onChange} style={{ borderRadius: 5 }}/>
     </Modal>
   );
 }

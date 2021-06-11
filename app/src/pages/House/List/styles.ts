@@ -6,5 +6,13 @@ export const useStyles = createUseStyles({
   },
   actionButtons: {
     marginBottom: 10
+  },
+  actionButton: {
+    borderRadius: 5
+  },
+  gridButton: {
+    padding: 0,
+    width: 34,
+    borderRadius: 5
   }
 })

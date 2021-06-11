@@ -41,6 +41,12 @@ const Router = () => {
           </Layout>
         </PrivateRoute>
 
+        <PrivateRoute path={RouterPaths.GeneralUserTemplate} exact>
+          <Layout>
+            <UserGeneral />
+          </Layout>
+        </PrivateRoute>
+
         <PrivateRoute path={RouterPaths.HouseList} exact>
           <Layout>
             <HouseList />

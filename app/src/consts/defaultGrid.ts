@@ -1,15 +1,15 @@
-import { GridPager, GridRequest, GridSorter } from "../services/types";
+import { GridPager, GridRequest, GridSearch, GridSorter } from "../services/types";
 
 export const DefaultPageSize = 10;
 
-export const DefaultGridRequest = (pager: GridPager, sorter?: GridSorter): GridRequest => ({
+export const DefaultGridRequest = (pager: GridPager, sorter?: GridSorter, search?: GridSearch): GridRequest => ({
   filters: [],
   pager,
   search: {
     fields: [],
     value: ""
   },
-  sorter: sorter ? [{ ...sorter, order: sorter.order === "ascend" ? "asc" : "desc" }] : []
+  sorter: sorter && sorter.field ? [{ ...sorter, order: sorter.order === "ascend" ? "asc" : "desc" }] : []
 });
 
 export const DefaultPager: GridPager = {

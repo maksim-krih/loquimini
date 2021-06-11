@@ -76,18 +76,18 @@ const General: FC<IProps> = (props: IProps) => {
     <div className={classes.container}>
       <div className={classes.actionButtons}>
         {isCreate ? (
-          <Button onClick={() => form.submit()}>
+          <Button onClick={() => form.submit()} style={{ borderRadius: 5, marginRight: 5 }} type="primary">
             Create
           </Button>
         ) : (
-          <Button onClick={() => isEdit ? form.submit() : toggle()}>
+          <Button onClick={() => isEdit ? form.submit() : toggle()} style={{ borderRadius: 5 }} type="primary">
             Edit
           </Button>
         )}
+        <Button onClick={onCancel} style={{ borderRadius: 5, marginRight: 5 }}>
+          Cancel
+        </Button>
       </div>
-      <Button onClick={onCancel}>
-        Cancel
-      </Button>
       <Form
         labelCol={{ span: 3 }}
         wrapperCol={{ span: 10 }}
@@ -103,7 +103,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="firstName"
           rules={[{ required: true }]}
         >
-          <Input disabled={readonly} />
+          <Input disabled={readonly} style={{ borderRadius: 5 }}/>
         </FormItem>
     
         <FormItem
@@ -111,7 +111,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="lastName"
           rules={[{ required: true }]}
         >
-          <Input disabled={readonly} />
+          <Input disabled={readonly} style={{ borderRadius: 5 }}/>
         </FormItem>
 
         <FormItem
@@ -119,7 +119,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="email"
           rules={[{ required: true }]}
         >
-          <Input type="email" disabled={readonly} />
+          <Input type="email" disabled={readonly} style={{ borderRadius: 5 }}/>
         </FormItem>
 
         {isCreate && (
@@ -128,7 +128,7 @@ const General: FC<IProps> = (props: IProps) => {
             name="password"
             rules={[{ required: true }]}
           >
-            <Password />
+            <Password style={{ borderRadius: 5 }} />
           </FormItem>
         )}
       </Form>

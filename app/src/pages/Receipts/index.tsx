@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
-import { GridPager, Receipt } from "../../services/types";
+import { GridPager, GridSorter, Receipt } from "../../services/types";
 import Api, { AuthService } from "../../services";
 import { Table, TablePaginationConfig, Typography } from "antd";
 import { DefaultGridRequest, DefaultPager } from "../../consts";
@@ -26,21 +26,12 @@ const Receipts: FC<IProps> = (props: IProps) => {
   const [receiptId, setReceiptId] = useState("");
   const [pager, setPager] = useState(DefaultPager);
   const [loading, setLoading] = useState(false);
-
-  const getAddress = (receipt: Receipt) => {
-    if (receipt.house)
-    {
-      return `${receipt.house.street}, ${receipt.house.number}`
-    }
-    else if (receipt.flat){
-      return `${receipt.flat.street}, ${receipt.flat.houseNumber}, fl. ${receipt.flat.number}`
-    }
-  }
   
   const columns = [
     {
       title: 'Date',
       dataIndex: 'date',
+      sorter: true,
       render: (date: Date, record: Receipt) => (
         new Date(date).toLocaleDateString(undefined, {
           month: "long",
@@ -51,13 +42,12 @@ const Receipts: FC<IProps> = (props: IProps) => {
     {
       title: 'Address',
       dataIndex: 'address',
-      render: (_: any, record: Receipt) => (
-        getAddress(record)
-      )
+      sorter: true,
     },
     {
       title: 'House Type',
       dataIndex: 'houseType',
+      sorter: true,
       render: (houseType: HouseType, record: Receipt) => (
         HouseTypeLabel(houseType)
       )
@@ -65,6 +55,7 @@ const Receipts: FC<IProps> = (props: IProps) => {
     {
       title: 'Receipt Type',
       dataIndex: 'type',
+      sorter: true,
       render: (type: ReceiptType, record: Receipt) => (
         ReceiptTypeLabel(type)
       )
@@ -72,6 +63,7 @@ const Receipts: FC<IProps> = (props: IProps) => {
     {
       title: 'Status',
       dataIndex: 'status',
+      sorter: true,
       render: (status: ReceiptStatus, record: Receipt) => (
         ReceiptStatusLabel(status)
       )
@@ -79,6 +71,7 @@ const Receipts: FC<IProps> = (props: IProps) => {
     {
       title: 'Old Indicator',
       dataIndex: 'oldIndicator',
+      sorter: true,
       render: (oldIndicator: number, record: Receipt) => {
         return record.type === ReceiptType.ColdWater ||
           record.type === ReceiptType.Electricity ||
@@ -90,6 +83,7 @@ const Receipts: FC<IProps> = (props: IProps) => {
     {
       title: 'New Indicator',
       dataIndex: 'newIndicator',
+      sorter: true,
       render: (newIndicator: number, record: Receipt) => {
         return record.type === ReceiptType.ColdWater ||
           record.type === ReceiptType.Electricity ||
@@ -101,18 +95,22 @@ const Receipts: FC<IProps> = (props: IProps) => {
     {
       title: 'Rate',
       dataIndex: 'rate',
+      sorter: true,
     },
     {
       title: 'Debt',
       dataIndex: 'debt',
+      sorter: true,
     },
     {
       title: 'Total',
       dataIndex: 'total',
+      sorter: true,
     },
     {
       title: 'Paid',
       dataIndex: 'paid',
+      sorter: true,
     },
     {
       title: '',
@@ -146,10 +144,10 @@ const Receipts: FC<IProps> = (props: IProps) => {
     getReceiptsData(pager);
   }, []);
 
-  const getReceiptsData = (pager: GridPager) => {
+  const getReceiptsData = (pager: GridPager, sorter?: GridSorter) => {
     setLoading(true);
 
-    const request = DefaultGridRequest(pager);
+    const request = DefaultGridRequest(pager, sorter);
 
     Api.Receipt.getByUserIdGrid(AuthService.User.id, request)
     .then((response: any) => {
@@ -164,9 +162,9 @@ const Receipts: FC<IProps> = (props: IProps) => {
     });
   };
 
-  const handleTableChange = (pagination: TablePaginationConfig) => {
+  const handleTableChange = (pagination: TablePaginationConfig, filters: any, sorter: any) => {
     setPager({...pager, current: pagination.current!});
-    getReceiptsData({...pager, current: pagination.current!});
+    getReceiptsData({...pager, current: pagination.current!}, sorter);
   };
 
   const fillModalCancel = () => {

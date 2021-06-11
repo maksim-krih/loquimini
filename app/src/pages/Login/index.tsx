@@ -64,7 +64,7 @@ const Login: FC<IProps> = (props: IProps) => {
             name="email"
             rules={[{ required: true }]}
           >
-            <Input />
+            <Input  style={{ borderRadius: 5 }}/>
           </Form.Item>
 
           <Form.Item
@@ -73,7 +73,7 @@ const Login: FC<IProps> = (props: IProps) => {
 
             rules={[{ required: true }]}
           >
-            <Password />
+            <Password  style={{ borderRadius: 5 }}/>
           </Form.Item>
         </Form>
         <div style={{marginBottom: 10}}></div>
@@ -82,6 +82,7 @@ const Login: FC<IProps> = (props: IProps) => {
           onClick={() => form.submit()} 
           style={{ width: "100%", }}
           loading={loading}
+          type="primary"
         >
           Sign in
         </Button>

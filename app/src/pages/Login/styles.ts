@@ -5,7 +5,8 @@ export const useStyles = createUseStyles({
     backgroundColor: "#001529",
     position: "fixed",
     width: "100%",
-    height: "100%"
+    height: "100%",
+    display: "flex"
   },
   login: {
     backgroundColor: "#fff",
@@ -13,6 +14,5 @@ export const useStyles = createUseStyles({
     width: 500,
     borderRadius: "20px",
     margin: "auto",
-    marginTop: 300
   }
 })
