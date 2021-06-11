@@ -10,6 +10,10 @@ const { Title } = Typography;
 const Dashboard: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const [info, setInfo] = useState<DashboardInfo | undefined>(undefined);
+  const date = new Date().toLocaleDateString(undefined, {
+    month: "long",
+    year: "numeric",
+  });
 
   useEffect(() => {
     getDashboard();
@@ -24,19 +28,20 @@ const Dashboard: FC<IProps> = (props: IProps) => {
 
   return (
     <div className={classes.container}>
+      <Title level={3}>{date}</Title>
       {info && 
         <>
           <Title level={4}>Total sum</Title>
-          <div>{info.totalSum}</div>
+          <Title level={5}>${info.totalSum}</Title>
           <br />
           <Title level={4}>Total debts</Title>
-          <div>{info.totalDebts}</div>
+          <Title level={5}>${info.totalDebts}</Title>
           <br />
           <Title level={4}>Filled</Title>
-          <div>{info.currentFilled}/{info.totalFilled}</div>
+          <Title level={5}>{info.currentFilled}/{info.totalFilled}</Title>
           <br />
           <Title level={4}>Paid</Title>
-          <div>{info.currentPaid}/{info.totalPaid}</div>
+          <Title level={5}>{info.currentPaid}/{info.totalPaid}</Title>
           <br />
         </>
       }

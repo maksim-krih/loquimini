@@ -58,10 +58,13 @@ const PayModal: FC<IProps> = (props: IProps) => {
       onOk={handleOk} 
       onCancel={onCancel}
     >
-      <div style={{ marginBottom: 6}}>
+      <div style={{ marginBottom: 10}}>
         <CardElement />
       </div>
-      <InputNumber value={value} onChange={onChange} style={{ borderRadius: 5 }}/>
+      <div style={{ display: "flex", alignItems: "center"}}>
+        <span style={{ marginRight: 6}}><b>$</b></span>
+        <InputNumber value={value} onChange={onChange} style={{ borderRadius: 5 }} min={0.01}/>
+      </div>
     </Modal>
   );
 }

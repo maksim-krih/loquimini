@@ -205,7 +205,7 @@ const General: FC<IProps> = (props: IProps) => {
           name="number"
           rules={[{ required: true }]}
         >
-          <Input disabled={readonly} style={{ borderRadius: 5 }}/>
+          <Input disabled={readonly} style={{ borderRadius: 5 }} />
         </FormItem>
 
         <FormItem
@@ -241,32 +241,32 @@ const General: FC<IProps> = (props: IProps) => {
               name={["info", "area"]}
               rules={[{ required: true }]}
             >
-              <InputNumber disabled={readonly} style={{ borderRadius: 5 }} />
+              <InputNumber disabled={readonly} style={{ borderRadius: 5 }} min={1}/>
             </FormItem>
             <Title level={5}>Default Indicators</Title>
             <FormItem
               label="Cold Water"
               name="coldWater"
             >
-              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0}/>
             </FormItem>
             <FormItem
               label="Hot Water"
               name="hotWater"
             >
-              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0}/>
             </FormItem>
             <FormItem
               label="Electricity"
               name="electricity"
             >
-              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0}/>
             </FormItem>
             <FormItem
               label="Gas"
               name="gas"
             >
-              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+              <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0}/>
             </FormItem>
           </>
         ) : (
@@ -313,7 +313,7 @@ const General: FC<IProps> = (props: IProps) => {
                         label="Area"
                         rules={[{ required: true }]}
                       >
-                        <InputNumber disabled={readonly} style={{ borderRadius: 5 }} />
+                        <InputNumber disabled={readonly} style={{ borderRadius: 5 }} min={1}/>
                       </Form.Item>
                       <Title level={5}>Default Indicators</Title>
                       <FormItem
@@ -322,7 +322,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'coldWater']}
                         label="Cold Water"
                       >
-                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0}/>
                       </FormItem>
                       <FormItem
                         {...restField}
@@ -330,7 +330,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'hotWater']}
                         label="Hot Water"
                       >
-                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0} />
                       </FormItem>
                       <FormItem
                         {...restField}
@@ -338,7 +338,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'electricity']}
                         label="Electricity"
                       >
-                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0}/>
                       </FormItem>
                       <FormItem
                         {...restField}
@@ -346,7 +346,7 @@ const General: FC<IProps> = (props: IProps) => {
                         fieldKey={[fieldKey, 'gas']}
                         label="Gas"
                       >
-                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} />
+                        <InputNumber disabled={readonly || !isCreate} style={{ borderRadius: 5 }} min={0}/>
                       </FormItem>
                     </>
                   ))}

@@ -1,9 +1,9 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IProps } from "./types";
 import { useStyles } from "./styles";
 import { GridPager, GridSorter, Receipt } from "../../services/types";
 import Api, { AuthService } from "../../services";
-import { Table, TablePaginationConfig, Typography } from "antd";
+import { Button, Table, TablePaginationConfig, Typography } from "antd";
 import { DefaultGridRequest, DefaultPager } from "../../consts";
 import { 
   HouseType, 
@@ -15,6 +15,7 @@ import {
 } from "../../enums";
 import FillModal from "./fillModal";
 import PayModal from "./payModal";
+import { CheckCircleOutlined, CloseCircleOutlined, DollarCircleOutlined, EditOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
 const { Link } = Typography;
 
@@ -26,6 +27,32 @@ const Receipts: FC<IProps> = (props: IProps) => {
   const [receiptId, setReceiptId] = useState("");
   const [pager, setPager] = useState(DefaultPager);
   const [loading, setLoading] = useState(false);
+
+  const getStatus = (status: ReceiptStatus) => {
+    switch (status) {
+      case ReceiptStatus.Created:
+        return (
+          <div>
+            <span><CloseCircleOutlined /></span>
+            <span>{ReceiptStatusLabel(status)}</span>
+          </div>
+        );
+      case ReceiptStatus.Filled:
+        return (
+          <div>
+            <span><ExclamationCircleOutlined /></span>
+            <span>{ReceiptStatusLabel(status)}</span>
+          </div>
+        );
+      case ReceiptStatus.Paid:
+        return (
+          <div>
+            <span><CheckCircleOutlined /></span>
+            <span>{ReceiptStatusLabel(status)}</span>
+          </div>
+        );
+    }
+  }
   
   const columns = [
     {
@@ -96,21 +123,33 @@ const Receipts: FC<IProps> = (props: IProps) => {
       title: 'Rate',
       dataIndex: 'rate',
       sorter: true,
+      render: (rate: number, record: Receipt) => {
+        return `$${rate}`;
+      }
     },
     {
       title: 'Debt',
       dataIndex: 'debt',
       sorter: true,
+      render: (debt: number, record: Receipt) => {
+        return `$${debt}`;
+      }
     },
     {
       title: 'Total',
       dataIndex: 'total',
       sorter: true,
+      render: (total: number, record: Receipt) => {
+        return `$${total}`;
+      }
     },
     {
       title: 'Paid',
       dataIndex: 'paid',
       sorter: true,
+      render: (paid: number, record: Receipt) => {
+        return `$${paid}`;
+      }
     },
     {
       title: '',
@@ -119,21 +158,27 @@ const Receipts: FC<IProps> = (props: IProps) => {
         switch (record.status) {
           case ReceiptStatus.Created:
             return (
-              <Link onClick={(e) => {
-                setReceiptId(record.id);
-                setFillModalVisible(true);
-              }}>
-                Fill
-              </Link>
+              <Button 
+                onClick={(e) => {
+                  setReceiptId(record.id);
+                  setFillModalVisible(true);
+                }}
+                className={classes.gridButton}
+              >
+                <EditOutlined />
+              </Button>
             );
           case ReceiptStatus.Filled:
             return (
-              <Link onClick={(e) => {
-                setReceiptId(record.id);
-                setPayModalVisible(true);
-              }}>
-                Pay
-              </Link>
+              <Button 
+                onClick={(e) => {
+                  setReceiptId(record.id);
+                  setPayModalVisible(true);
+                }}
+                className={classes.gridButton}
+              >
+                <DollarCircleOutlined />
+              </Button>
             );
         }
       },
