@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { useToggle } from 'ahooks';
 import { Avatar, Dropdown, Layout as AntLayout, Menu } from 'antd';
 import {
@@ -56,7 +56,7 @@ const Layout: FC<IProps> = (props: IProps) => {
           </div>
           <Menu theme="dark" mode="inline">
             {AuthService.IsAdmin ? (
-              <>
+              <Fragment>
                 <Menu.Item key="1" icon={<ApartmentOutlined />} onClick={() => history.push(RouterPaths.HouseList)}>
                   Houses
                 </Menu.Item>
@@ -66,16 +66,16 @@ const Layout: FC<IProps> = (props: IProps) => {
                 <Menu.Item key="3" icon={<ToolOutlined />} onClick={() => history.push(RouterPaths.Triggers)}>
                   Triggers
                 </Menu.Item>
-              </>
+              </Fragment>
             ) : (
-              <>
+              <Fragment>
                 <Menu.Item key="1" icon={<HomeOutlined />} onClick={() => history.push(RouterPaths.Dashboard)}>
                   Dashboard
                 </Menu.Item>
                 <Menu.Item key="2" icon={<DollarOutlined />} onClick={() => history.push(RouterPaths.Receipts)}>
                   Receipts
                 </Menu.Item>
-              </>
+              </Fragment>
             )}
           </Menu>
         </Sider>

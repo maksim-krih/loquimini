@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Create should render Create Component 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`User Edit should render Edit Component 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`User List should render List Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <div
+    className="actionButtons-0-2-2"
+  >
+    <Button
+      onClick={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+        }
+      }
+      type="primary"
+    >
+      Create
+    </Button>
+  </div>
+  <Table
+    columns={
+      Array [
+        Object {
+          "dataIndex": "userName",
+          "search": true,
+          "sorter": true,
+          "title": "Name",
+        },
+        Object {
+          "dataIndex": "email",
+          "search": true,
+          "sorter": true,
+          "title": "Email",
+        },
+        Object {
+          "dataIndex": "",
+          "render": [Function],
+          "title": "",
+        },
+      ]
+    }
+    data={Array []}
+    getData={[Function]}
+    loading={false}
+    onRow={[Function]}
+    pager={
+      Object {
+        "current": 1,
+        "pageSize": 10,
+        "total": 0,
+      }
+    }
+    setPager={[Function]}
+  />
+</div>
+`;

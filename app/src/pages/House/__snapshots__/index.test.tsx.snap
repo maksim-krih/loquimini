@@ -1,0 +1,592 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`House Create should render Create Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <div
+    className="actionButtons-0-2-2"
+  >
+    <Button
+      className="actionButton-0-2-3"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginRight": 5,
+        }
+      }
+      type="primary"
+    >
+      Create
+    </Button>
+    <Button
+      className="actionButton-0-2-3"
+      onClick={[Function]}
+    >
+      Cancel
+    </Button>
+  </div>
+  <ForwardRef(InternalForm)
+    form={
+      Object {
+        "__INTERNAL__": Object {
+          "itemRef": [Function],
+        },
+        "getFieldError": [Function],
+        "getFieldInstance": [Function],
+        "getFieldValue": [Function],
+        "getFieldsError": [Function],
+        "getFieldsValue": [Function],
+        "getInternalHooks": [Function],
+        "isFieldTouched": [Function],
+        "isFieldValidating": [Function],
+        "isFieldsTouched": [Function],
+        "isFieldsValidating": [Function],
+        "resetFields": [Function],
+        "scrollToField": [Function],
+        "setFields": [Function],
+        "setFieldsValue": [Function],
+        "submit": [Function],
+        "validateFields": [Function],
+      }
+    }
+    initialValues={
+      Object {
+        "type": 0,
+      }
+    }
+    labelCol={
+      Object {
+        "span": 3,
+      }
+    }
+    name="house"
+    onFinish={[Function]}
+    onFinishFailed={[Function]}
+    validateMessages={
+      Object {
+        "required": "\${label} is required!",
+      }
+    }
+    wrapperCol={
+      Object {
+        "span": 10,
+      }
+    }
+  >
+    <FormItem
+      label="Street"
+      name="street"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={false}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Number"
+      name="number"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={false}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Type"
+      name="type"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <ForwardRef(InternalSelect)
+        disabled={false}
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Private",
+              "value": 0,
+            },
+            Object {
+              "label": "Apartment",
+              "value": 1,
+            },
+          ]
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="User"
+      name="userId"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <ForwardRef(InternalSelect)
+        disabled={false}
+        options={Array []}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Area"
+      name={
+        Array [
+          "info",
+          "area",
+        ]
+      }
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <ForwardRef
+        disabled={false}
+        min={1}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <Title
+      level={5}
+    >
+      Default Indicators
+    </Title>
+    <FormItem
+      label="Cold Water"
+      name="coldWater"
+    >
+      <ForwardRef
+        disabled={false}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Hot Water"
+      name="hotWater"
+    >
+      <ForwardRef
+        disabled={false}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Electricity"
+      name="electricity"
+    >
+      <ForwardRef
+        disabled={false}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Gas"
+      name="gas"
+    >
+      <ForwardRef
+        disabled={false}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+  </ForwardRef(InternalForm)>
+</div>
+`;
+
+exports[`House Edit should render Edit Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <div
+    className="actionButtons-0-2-2"
+  >
+    <Button
+      className="actionButton-0-2-3"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginRight": 5,
+        }
+      }
+      type="primary"
+    >
+      Edit
+    </Button>
+    <Button
+      className="actionButton-0-2-3"
+      onClick={[Function]}
+    >
+      Cancel
+    </Button>
+  </div>
+  <ForwardRef(InternalForm)
+    form={
+      Object {
+        "__INTERNAL__": Object {
+          "itemRef": [Function],
+        },
+        "getFieldError": [Function],
+        "getFieldInstance": [Function],
+        "getFieldValue": [Function],
+        "getFieldsError": [Function],
+        "getFieldsValue": [Function],
+        "getInternalHooks": [Function],
+        "isFieldTouched": [Function],
+        "isFieldValidating": [Function],
+        "isFieldsTouched": [Function],
+        "isFieldsValidating": [Function],
+        "resetFields": [Function],
+        "scrollToField": [Function],
+        "setFields": [Function],
+        "setFieldsValue": [Function],
+        "submit": [Function],
+        "validateFields": [Function],
+      }
+    }
+    initialValues={
+      Object {
+        "type": 0,
+      }
+    }
+    labelCol={
+      Object {
+        "span": 3,
+      }
+    }
+    name="house"
+    onFinish={[Function]}
+    onFinishFailed={[Function]}
+    validateMessages={
+      Object {
+        "required": "\${label} is required!",
+      }
+    }
+    wrapperCol={
+      Object {
+        "span": 10,
+      }
+    }
+  >
+    <FormItem
+      label="Street"
+      name="street"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={true}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Number"
+      name="number"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={true}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Type"
+      name="type"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <ForwardRef(InternalSelect)
+        disabled={true}
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Private",
+              "value": 0,
+            },
+            Object {
+              "label": "Apartment",
+              "value": 1,
+            },
+          ]
+        }
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="User"
+      name="userId"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <ForwardRef(InternalSelect)
+        disabled={true}
+        options={Array []}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Area"
+      name={
+        Array [
+          "info",
+          "area",
+        ]
+      }
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <ForwardRef
+        disabled={true}
+        min={1}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <Title
+      level={5}
+    >
+      Default Indicators
+    </Title>
+    <FormItem
+      label="Cold Water"
+      name="coldWater"
+    >
+      <ForwardRef
+        disabled={true}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Hot Water"
+      name="hotWater"
+    >
+      <ForwardRef
+        disabled={true}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Electricity"
+      name="electricity"
+    >
+      <ForwardRef
+        disabled={true}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+    <FormItem
+      label="Gas"
+      name="gas"
+    >
+      <ForwardRef
+        disabled={true}
+        min={0}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+      />
+    </FormItem>
+  </ForwardRef(InternalForm)>
+</div>
+`;
+
+exports[`House List should render List Component 1`] = `
+<div
+  className="container-0-2-4"
+>
+  <div
+    className="actionButtons-0-2-5"
+  >
+    <Button
+      className="actionButton-0-2-6"
+      onClick={[Function]}
+      type="primary"
+    >
+      Create
+    </Button>
+  </div>
+  <Table
+    columns={
+      Array [
+        Object {
+          "dataIndex": "street",
+          "search": true,
+          "sorter": true,
+          "title": "Street",
+        },
+        Object {
+          "dataIndex": "number",
+          "search": true,
+          "sorter": true,
+          "title": "Number",
+        },
+        Object {
+          "dataIndex": "type",
+          "filters": Array [
+            Object {
+              "text": "Private",
+              "value": "0",
+            },
+            Object {
+              "text": "Apartment",
+              "value": "1",
+            },
+          ],
+          "render": [Function],
+          "sorter": true,
+          "title": "Type",
+        },
+        Object {
+          "dataIndex": "",
+          "render": [Function],
+          "title": "",
+        },
+      ]
+    }
+    data={Array []}
+    getData={[Function]}
+    loading={false}
+    onRow={[Function]}
+    pager={
+      Object {
+        "current": 1,
+        "pageSize": 10,
+        "total": 0,
+      }
+    }
+    setPager={[Function]}
+  />
+</div>
+`;

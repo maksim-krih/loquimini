@@ -43,7 +43,7 @@ namespace Loquimini.Service
 
             foreach (var user in users)
             {
-                foreach (var house in user.Houses)
+                foreach (var house in user.Houses.Where(x => x.Type == HouseType.Private))
                 {
                     foreach (var receiptType in Enum.GetValues(typeof(ReceiptType)))
                     {
@@ -87,7 +87,7 @@ namespace Loquimini.Service
                 userReceipts.AddRange(flatReceipts);
             }
 
-            foreach (var house in user.Houses)
+            foreach (var house in user.Houses.Where(x => x.Type == HouseType.Private))
             {
                 var houseReceipts = receipts.Where(x => x.HouseId == house.Id);
 
@@ -107,7 +107,7 @@ namespace Loquimini.Service
                 .FirstOrDefaultAsync();
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == receipt.HouseId || x.FlatId == receipt.FlatId) && x.Type == receipt.Type)
+                .Get(x => (x.HouseId == receipt.HouseId && receipt.HouseId != null || x.FlatId == receipt.FlatId && receipt.FlatId != null) && x.Type == receipt.Type)
                 .OrderByDescending(x => x.CreatedDate)
                 .Skip(1)
                 .FirstOrDefaultAsync();
@@ -132,7 +132,7 @@ namespace Loquimini.Service
                 .FirstOrDefaultAsync();
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == receipt.HouseId || x.FlatId == receipt.FlatId) && x.Type == receipt.Type)
+                .Get(x => (x.HouseId == receipt.HouseId && receipt.HouseId != null || x.FlatId == receipt.FlatId && receipt.FlatId != null) && x.Type == receipt.Type)
                 .OrderByDescending(x => x.CreatedDate)
                 .Skip(1)
                 .FirstOrDefaultAsync();
@@ -193,7 +193,7 @@ namespace Loquimini.Service
             const double coldWaterRate = 1.5;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.ColdWater)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.ColdWater)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 
@@ -218,7 +218,7 @@ namespace Loquimini.Service
             const double electricityRate = 1;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.Electricity)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.Electricity)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 
@@ -243,7 +243,7 @@ namespace Loquimini.Service
             const double garbageRate = 45;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.Garbage)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.Garbage)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 
@@ -268,7 +268,7 @@ namespace Loquimini.Service
             const double gasRate = 7.5;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.Gas)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.Gas)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 
@@ -293,7 +293,7 @@ namespace Loquimini.Service
             const double hotWaterRate = 1.8;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.HotWater)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.HotWater)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 
@@ -318,7 +318,7 @@ namespace Loquimini.Service
             const double intercomRate = 45;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.Intercom)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.Intercom)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 
@@ -343,7 +343,7 @@ namespace Loquimini.Service
             const double rentRate = 2.5;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.Rent)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.Rent)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 
@@ -368,7 +368,7 @@ namespace Loquimini.Service
             const double sewerageRate = 20;
 
             var lastReceipt = await _databaseManager.ReceiptRepository
-                .Get(x => (x.HouseId == houseId || x.FlatId == flatId) && x.Type == ReceiptType.Sewerage)
+                .Get(x => (x.HouseId == houseId && houseId != null || x.FlatId == flatId && flatId != null) && x.Type == ReceiptType.Sewerage)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync();
 

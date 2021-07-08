@@ -25,6 +25,7 @@ namespace Loquimini.ModelDTO.UserDTO
         public IProfileExpression Configure(IProfileExpression config)
         {
             config.CreateMap<User, UserDTO>()
+                .ForMember(x => x.UserName, cfg => cfg.MapFrom(x => $"{x.FirstName} {x.LastName}"))
                 .ReverseMap()
                 .ForMember(x => x.Id, cfg => cfg.Ignore())
                 .ForMember(x => x.UserName, cfg => cfg.MapFrom(x => x.Email));

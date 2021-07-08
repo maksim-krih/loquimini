@@ -9,20 +9,27 @@ import { RouterPaths } from "../../consts";
 const Trigger: FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   const generateReceipts = async () => {
+    setLoading(true);
     Api.Receipt.generateReceipts()
     .then((result: any) => {
       
     })
     .catch((e: any) => {
 
+    })
+    .finally(() => {
+      setLoading(false);
     });
   };
 
   return (
     <div className={classes.container}>
-      <Button onClick={generateReceipts} style={{ borderRadius: 5 }} type="primary">Generate Receipts</Button>
+      <Button onClick={generateReceipts} style={{ borderRadius: 5 }} type="primary"
+      loading={loading}
+      >Generate Receipts</Button>
     </div>
   );
 }

@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  loquimini-app:
+    container_name: loquimini-app
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    working_dir: /app
+    ports:
+      - 3000:3000
+
+  loquimini-back:
+    container_name: loquimini-back
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 44320:44320

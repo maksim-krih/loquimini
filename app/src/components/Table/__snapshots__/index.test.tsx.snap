@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table should render Table Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <Table
+    columns={Array []}
+    dataSource={Array []}
+    loading={false}
+    onChange={[Function]}
+    onRow={[Function]}
+    pagination={
+      Object {
+        "current": 0,
+        "pageSize": 0,
+        "total": 0,
+      }
+    }
+    rowKey={[Function]}
+  />
+</div>
+`;

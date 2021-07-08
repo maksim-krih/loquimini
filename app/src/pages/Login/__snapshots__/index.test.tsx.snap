@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login should render Login Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <div
+    className="login-0-2-2"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "center",
+          "marginBottom": 10,
+        }
+      }
+    >
+      <img
+        alt="logo"
+        src="logo.png"
+        style={
+          Object {
+            "marginRight": 10,
+            "width": 48,
+          }
+        }
+      />
+      <Title
+        level={3}
+        style={
+          Object {
+            "color": "#001529",
+          }
+        }
+      >
+        Loquimini
+      </Title>
+    </div>
+    <ForwardRef(InternalForm)
+      form={
+        Object {
+          "__INTERNAL__": Object {
+            "itemRef": [Function],
+          },
+          "getFieldError": [Function],
+          "getFieldInstance": [Function],
+          "getFieldValue": [Function],
+          "getFieldsError": [Function],
+          "getFieldsValue": [Function],
+          "getInternalHooks": [Function],
+          "isFieldTouched": [Function],
+          "isFieldValidating": [Function],
+          "isFieldsTouched": [Function],
+          "isFieldsValidating": [Function],
+          "resetFields": [Function],
+          "scrollToField": [Function],
+          "setFields": [Function],
+          "setFieldsValue": [Function],
+          "submit": [Function],
+          "validateFields": [Function],
+        }
+      }
+      labelCol={
+        Object {
+          "span": 6,
+        }
+      }
+      name="login"
+      onFinish={[Function]}
+      onFinishFailed={[Function]}
+      validateMessages={
+        Object {
+          "required": "\${label} is required!",
+        }
+      }
+      wrapperCol={
+        Object {
+          "span": 16,
+        }
+      }
+    >
+      <FormItem
+        label="Email"
+        name="email"
+        rules={
+          Array [
+            Object {
+              "required": true,
+            },
+          ]
+        }
+      >
+        <Input
+          style={
+            Object {
+              "borderRadius": 5,
+            }
+          }
+          type="text"
+        />
+      </FormItem>
+      <FormItem
+        label="Password"
+        name="password"
+        rules={
+          Array [
+            Object {
+              "required": true,
+            },
+          ]
+        }
+      >
+        <Password
+          action="click"
+          iconRender={[Function]}
+          style={
+            Object {
+              "borderRadius": 5,
+            }
+          }
+          visibilityToggle={true}
+        />
+      </FormItem>
+    </ForwardRef(InternalForm)>
+    <div
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    />
+    <Button
+      loading={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+      type="primary"
+    >
+      Sign in
+    </Button>
+  </div>
+</div>
+`;

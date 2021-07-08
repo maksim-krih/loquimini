@@ -45,7 +45,7 @@ namespace Loquimini.API.Controllers
         {
 			var users = _databaseManager.UserRepository.Get();
 
-            var gridResponse = await request.GenerateGridResponseAsync(users);
+            var gridResponse = await request.GenerateGridResponseAsync(_mapper.Map<ICollection<UserDTO>>(users).AsQueryable());
 
             return Ok(gridResponse);
         }

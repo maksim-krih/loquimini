@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Receipts FillModal should render FillModal Component 1`] = `
+<Modal
+  confirmLoading={false}
+  okType="primary"
+  onCancel={[Function]}
+  onOk={[Function]}
+  title="Fill Receipt"
+  visible={false}
+  width={520}
+>
+  <ForwardRef
+    min={1}
+    onChange={[Function]}
+    style={
+      Object {
+        "borderRadius": 5,
+      }
+    }
+  />
+</Modal>
+`;
+
+exports[`Receipts Index should render Receipts Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <Table
+    columns={
+      Array [
+        Object {
+          "dataIndex": "date",
+          "render": [Function],
+          "sorter": true,
+          "title": "Date",
+        },
+        Object {
+          "dataIndex": "address",
+          "sorter": true,
+          "title": "Address",
+        },
+        Object {
+          "dataIndex": "houseType",
+          "render": [Function],
+          "sorter": true,
+          "title": "House Type",
+        },
+        Object {
+          "dataIndex": "type",
+          "render": [Function],
+          "sorter": true,
+          "title": "Receipt Type",
+        },
+        Object {
+          "dataIndex": "status",
+          "render": [Function],
+          "sorter": true,
+          "title": "Status",
+          "width": 100,
+        },
+        Object {
+          "dataIndex": "oldIndicator",
+          "render": [Function],
+          "sorter": true,
+          "title": "Old Indicator",
+        },
+        Object {
+          "dataIndex": "newIndicator",
+          "render": [Function],
+          "sorter": true,
+          "title": "New Indicator",
+        },
+        Object {
+          "dataIndex": "rate",
+          "render": [Function],
+          "sorter": true,
+          "title": "Rate",
+        },
+        Object {
+          "dataIndex": "debt",
+          "render": [Function],
+          "sorter": true,
+          "title": "Debt",
+        },
+        Object {
+          "dataIndex": "total",
+          "render": [Function],
+          "sorter": true,
+          "title": "Total",
+        },
+        Object {
+          "dataIndex": "paid",
+          "render": [Function],
+          "sorter": true,
+          "title": "Paid",
+        },
+        Object {
+          "dataIndex": "",
+          "render": [Function],
+          "title": "",
+        },
+      ]
+    }
+    dataSource={Array []}
+    loading={false}
+    onChange={[Function]}
+    pagination={
+      Object {
+        "current": 1,
+        "pageSize": 10,
+        "total": 0,
+      }
+    }
+    rowKey={[Function]}
+  />
+</div>
+`;
+
+exports[`Receipts PayModal should render PayModal Component 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "elements": null,
+      "stripe": null,
+    }
+  }
+>
+  <PayModal
+    onCancel={[Function]}
+    receiptId=""
+    reloadGrid={[Function]}
+    visible={false}
+  />
+</ContextProvider>
+`;

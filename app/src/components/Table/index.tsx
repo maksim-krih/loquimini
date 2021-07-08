@@ -16,12 +16,12 @@ const Table: FC<IProps> = (props: IProps) => {
     getData({...pager, current: pagination.current!}, sorter);
   };
 
-  const getColumnSearchProps = ( dataIndex: any ) => ({
+  const getColumnSearchProps = ( dataIndex: any, label: string ) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
       <div style={{ padding: 8 }}>
         <Input
           ref={searchInputRef}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Search ${label}`}
           value={selectedKeys[0]}
           onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -67,7 +67,7 @@ const Table: FC<IProps> = (props: IProps) => {
     setSearchText('');
   };
 
-  const columnsModel = columns.map(x => x.search ? {...x, ...getColumnSearchProps(x.dataIndex) } : x);
+  const columnsModel = columns.map(x => x.search ? {...x, ...getColumnSearchProps(x.dataIndex, x.title) } : x);
 
   return (
     <div className={classes.container}>

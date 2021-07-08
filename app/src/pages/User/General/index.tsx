@@ -80,7 +80,7 @@ const General: FC<IProps> = (props: IProps) => {
             Create
           </Button>
         ) : (
-          <Button onClick={() => isEdit ? form.submit() : toggle()} style={{ borderRadius: 5 }} type="primary">
+          <Button onClick={() => isEdit ? form.submit() : toggle()} style={{ borderRadius: 5, marginRight: 5 }} type="primary">
             Edit
           </Button>
         )}

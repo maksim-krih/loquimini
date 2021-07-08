@@ -32,22 +32,22 @@ const Receipts: FC<IProps> = (props: IProps) => {
     switch (status) {
       case ReceiptStatus.Created:
         return (
-          <div>
-            <span><CloseCircleOutlined /></span>
+          <div style={{ display: "flex", alignItems: "center", color: "#d50000" }}>
+            <span style={{ marginRight: 4 }}><CloseCircleOutlined /></span>
             <span>{ReceiptStatusLabel(status)}</span>
           </div>
         );
       case ReceiptStatus.Filled:
         return (
-          <div>
-            <span><ExclamationCircleOutlined /></span>
+          <div style={{ display: "flex", alignItems: "center", color: "#d0d000" }}>
+            <span style={{ marginRight: 4 }}><ExclamationCircleOutlined /></span>
             <span>{ReceiptStatusLabel(status)}</span>
           </div>
         );
       case ReceiptStatus.Paid:
         return (
-          <div>
-            <span><CheckCircleOutlined /></span>
+          <div style={{ display: "flex", alignItems: "center", color: "#24b02f" }}>
+            <span style={{ marginRight: 4 }}><CheckCircleOutlined /></span>
             <span>{ReceiptStatusLabel(status)}</span>
           </div>
         );
@@ -91,8 +91,9 @@ const Receipts: FC<IProps> = (props: IProps) => {
       title: 'Status',
       dataIndex: 'status',
       sorter: true,
+      width: 100,
       render: (status: ReceiptStatus, record: Receipt) => (
-        ReceiptStatusLabel(status)
+        getStatus(status)
       )
     },
     {

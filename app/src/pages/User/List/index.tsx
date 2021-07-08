@@ -24,7 +24,6 @@ const List: FC<IProps> = (props: IProps) => {
       dataIndex: 'userName',
       sorter: true,
       search: true,
-      render: (text: string, record: User)=> `${record.firstName} ${record.lastName}`
     },
     {
       title: 'Email',

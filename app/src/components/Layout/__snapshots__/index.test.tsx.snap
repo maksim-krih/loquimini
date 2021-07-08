@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should render Layout Component 1`] = `
+<Layout
+  className="layoutContainer-0-2-7"
+>
+  <Sider
+    collapsed={false}
+    collapsible={true}
+    trigger={null}
+  >
+    <div
+      className="logo-0-2-2"
+    >
+      <img
+        alt="logo"
+        src="logo.png"
+        style={
+          Object {
+            "filter": "invert(1)",
+            "marginRight": 8,
+          }
+        }
+      />
+      <Title
+        level={3}
+      >
+        Loquimini
+      </Title>
+    </div>
+    <Menu
+      mode="inline"
+      theme="dark"
+    >
+      <MenuItem
+        icon={<ForwardRef(HomeOutlined) />}
+        key="1"
+        onClick={[Function]}
+      >
+        Dashboard
+      </MenuItem>
+      <MenuItem
+        icon={<ForwardRef(DollarOutlined) />}
+        key="2"
+        onClick={[Function]}
+      >
+        Receipts
+      </MenuItem>
+    </Menu>
+  </Sider>
+  <Layout
+    className="layout-0-2-3"
+  >
+    <Header
+      className="header-0-2-4"
+    >
+      <ForwardRef(MenuFoldOutlined)
+        className="trigger-0-2-1"
+        onClick={[Function]}
+      />
+      <div
+        className="profile-0-2-8"
+      >
+        <Avatar
+          className="user-0-2-9"
+          icon={<ForwardRef(UserOutlined) />}
+          shape="circle"
+          size="default"
+        />
+        <Text />
+        <Dropdown
+          mouseEnterDelay={0.15}
+          mouseLeaveDelay={0.1}
+          overlay={
+            <Menu>
+              <MenuItem>
+                Profile
+              </MenuItem>
+              <MenuItem
+                onClick={[Function]}
+              >
+                Sign Out
+              </MenuItem>
+            </Menu>
+          }
+          trigger={
+            Array [
+              "click",
+            ]
+          }
+        >
+          <ForwardRef(MoreOutlined) />
+        </Dropdown>
+      </div>
+    </Header>
+    <Content
+      className="contentContainer-0-2-5"
+    >
+      <div
+        className="content-0-2-6"
+      />
+    </Content>
+  </Layout>
+</Layout>
+`;

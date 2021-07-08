@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard should render Dashboard Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <Title
+    level={3}
+  >
+    July 2021
+  </Title>
+</div>
+`;
