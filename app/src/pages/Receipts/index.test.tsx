@@ -11,10 +11,15 @@ const stripePromise = loadStripe('pk_test_WC7EYFzpuVCbs8ONcfSrjNE800zRXJe3lw');
 const setUpReceipts = () => shallow(<Receipts />);
 const setUpFillModal = (props: IFillModalProps) => shallow(<FillModal {...props} />);
 const setUpPayModal = (props: IPayModalProps) => shallow(
-  <Elements stripe={stripePromise}>
-    <PayModal  {...props} />
-  </Elements>
+  <PayModal  {...props} />
 );
+
+jest.mock('@stripe/react-stripe-js', () => ({
+  ...jest.requireActual('@stripe/react-stripe-js'),
+  useStripe: () => ({ }),
+  useElements:  () => ({ })
+}));
+
 
 describe("Receipts", () => {
   describe("Index", () => {

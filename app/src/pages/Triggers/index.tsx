@@ -27,9 +27,15 @@ const Trigger: FC<IProps> = (props: IProps) => {
 
   return (
     <div className={classes.container}>
-      <Button onClick={generateReceipts} style={{ borderRadius: 5 }} type="primary"
-      loading={loading}
-      >Generate Receipts</Button>
+      <Button 
+        id="generate-receipts"
+        onClick={generateReceipts} 
+        style={{ borderRadius: 5 }} 
+        type="primary"
+        loading={loading}
+      >
+        Generate Receipts
+      </Button>
     </div>
   );
 }

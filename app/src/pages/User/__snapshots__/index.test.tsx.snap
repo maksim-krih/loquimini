@@ -1,23 +1,503 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`User Create should render Create Component 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
-`;
-
-exports[`User Edit should render Edit Component 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
-`;
-
-exports[`User List should render List Component 1`] = `
 <div
   className="container-0-2-1"
 >
   <div
     className="actionButtons-0-2-2"
+  >
+    <Button
+      onClick={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+          "marginRight": 5,
+        }
+      }
+      type="primary"
+    >
+      Create
+    </Button>
+    <Button
+      onClick={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+          "marginRight": 5,
+        }
+      }
+    >
+      Cancel
+    </Button>
+  </div>
+  <ForwardRef(InternalForm)
+    form={
+      Object {
+        "__INTERNAL__": Object {
+          "itemRef": [Function],
+        },
+        "getFieldError": [Function],
+        "getFieldInstance": [Function],
+        "getFieldValue": [Function],
+        "getFieldsError": [Function],
+        "getFieldsValue": [Function],
+        "getInternalHooks": [Function],
+        "isFieldTouched": [Function],
+        "isFieldValidating": [Function],
+        "isFieldsTouched": [Function],
+        "isFieldsValidating": [Function],
+        "resetFields": [Function],
+        "scrollToField": [Function],
+        "setFields": [Function],
+        "setFieldsValue": [Function],
+        "submit": [Function],
+        "validateFields": [Function],
+      }
+    }
+    initialValues={Object {}}
+    labelCol={
+      Object {
+        "span": 3,
+      }
+    }
+    name="user"
+    onFinish={[Function]}
+    onFinishFailed={[Function]}
+    validateMessages={
+      Object {
+        "required": "\${label} is required!",
+      }
+    }
+    wrapperCol={
+      Object {
+        "span": 10,
+      }
+    }
+  >
+    <FormItem
+      label="First Name"
+      name="firstName"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={false}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Last Name"
+      name="lastName"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={false}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Email"
+      name="email"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={false}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="email"
+      />
+    </FormItem>
+    <FormItem
+      label="Password"
+      name="password"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Password
+        action="click"
+        iconRender={[Function]}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        visibilityToggle={true}
+      />
+    </FormItem>
+  </ForwardRef(InternalForm)>
+</div>
+`;
+
+exports[`User Edit should get User 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <div
+    className="actionButtons-0-2-2"
+  >
+    <button
+      className="ant-btn ant-btn-primary"
+      onClick={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+          "marginRight": 5,
+        }
+      }
+      type="button"
+    >
+      <span>
+        Edit
+      </span>
+    </button>
+    <button
+      className="ant-btn"
+      onClick={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+          "marginRight": 5,
+        }
+      }
+      type="button"
+    >
+      <span>
+        Cancel
+      </span>
+    </button>
+  </div>
+  <form
+    className="ant-form ant-form-horizontal"
+    id="user"
+    onReset={[Function]}
+    onSubmit={[Function]}
+  >
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-3 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="user_firstName"
+          title="First Name"
+        >
+          First Name
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-10 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input ant-input-disabled"
+              disabled={true}
+              id="user_firstName"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              style={
+                Object {
+                  "borderRadius": 5,
+                }
+              }
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-3 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="user_lastName"
+          title="Last Name"
+        >
+          Last Name
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-10 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input ant-input-disabled"
+              disabled={true}
+              id="user_lastName"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              style={
+                Object {
+                  "borderRadius": 5,
+                }
+              }
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-3 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="user_email"
+          title="Email"
+        >
+          Email
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-10 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input ant-input-disabled"
+              disabled={true}
+              id="user_email"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              style={
+                Object {
+                  "borderRadius": 5,
+                }
+              }
+              type="email"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`User Edit should render Edit Component 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <div
+    className="actionButtons-0-2-2"
+  >
+    <Button
+      onClick={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+          "marginRight": 5,
+        }
+      }
+      type="primary"
+    >
+      Edit
+    </Button>
+    <Button
+      onClick={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+          "marginRight": 5,
+        }
+      }
+    >
+      Cancel
+    </Button>
+  </div>
+  <ForwardRef(InternalForm)
+    form={
+      Object {
+        "__INTERNAL__": Object {
+          "itemRef": [Function],
+        },
+        "getFieldError": [Function],
+        "getFieldInstance": [Function],
+        "getFieldValue": [Function],
+        "getFieldsError": [Function],
+        "getFieldsValue": [Function],
+        "getInternalHooks": [Function],
+        "isFieldTouched": [Function],
+        "isFieldValidating": [Function],
+        "isFieldsTouched": [Function],
+        "isFieldsValidating": [Function],
+        "resetFields": [Function],
+        "scrollToField": [Function],
+        "setFields": [Function],
+        "setFieldsValue": [Function],
+        "submit": [Function],
+        "validateFields": [Function],
+      }
+    }
+    initialValues={Object {}}
+    labelCol={
+      Object {
+        "span": 3,
+      }
+    }
+    name="user"
+    onFinish={[Function]}
+    onFinishFailed={[Function]}
+    validateMessages={
+      Object {
+        "required": "\${label} is required!",
+      }
+    }
+    wrapperCol={
+      Object {
+        "span": 10,
+      }
+    }
+  >
+    <FormItem
+      label="First Name"
+      name="firstName"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={true}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Last Name"
+      name="lastName"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={true}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="text"
+      />
+    </FormItem>
+    <FormItem
+      label="Email"
+      name="email"
+      rules={
+        Array [
+          Object {
+            "required": true,
+          },
+        ]
+      }
+    >
+      <Input
+        disabled={true}
+        style={
+          Object {
+            "borderRadius": 5,
+          }
+        }
+        type="email"
+      />
+    </FormItem>
+  </ForwardRef(InternalForm)>
+</div>
+`;
+
+exports[`User List should render List Component 1`] = `
+<div
+  className="container-0-2-3"
+>
+  <div
+    className="actionButtons-0-2-4"
   >
     <Button
       onClick={[Function]}

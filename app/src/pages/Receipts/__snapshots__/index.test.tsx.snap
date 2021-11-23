@@ -118,19 +118,52 @@ exports[`Receipts Index should render Receipts Component 1`] = `
 `;
 
 exports[`Receipts PayModal should render PayModal Component 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "elements": null,
-      "stripe": null,
-    }
-  }
+<Modal
+  confirmLoading={false}
+  okType="primary"
+  onCancel={[Function]}
+  onOk={[Function]}
+  title="Pay Receipt"
+  visible={false}
+  width={520}
 >
-  <PayModal
-    onCancel={[Function]}
-    receiptId=""
-    reloadGrid={[Function]}
-    visible={false}
-  />
-</ContextProvider>
+  <div
+    style={
+      Object {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <CardElement />
+  </div>
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "marginRight": 6,
+        }
+      }
+    >
+      <b>
+        $
+      </b>
+    </span>
+    <ForwardRef
+      min={0.01}
+      onChange={[Function]}
+      style={
+        Object {
+          "borderRadius": 5,
+        }
+      }
+    />
+  </div>
+</Modal>
 `;

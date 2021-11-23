@@ -51,6 +51,7 @@ const Login: FC<IProps> = (props: IProps) => {
         </div>
         
         <Form
+          id="form"
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 16 }}
           form={form}
@@ -83,6 +84,7 @@ const Login: FC<IProps> = (props: IProps) => {
           style={{ width: "100%", }}
           loading={loading}
           type="primary"
+          id="submit"
         >
           Sign in
         </Button>

@@ -11,5 +11,7 @@ describe("Triggers", () => {
 
   it("should Generate receipts Triggers Component", () => {
     const component = setUp();
+    const button = component.find("#generate-receipts");
+    button.simulate("click");
   });
 });

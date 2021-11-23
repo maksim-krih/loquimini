@@ -62,6 +62,7 @@ exports[`Login should render Login Component 1`] = `
           "validateFields": [Function],
         }
       }
+      id="form"
       labelCol={
         Object {
           "span": 6,
@@ -132,6 +133,7 @@ exports[`Login should render Login Component 1`] = `
       }
     />
     <Button
+      id="submit"
       loading={false}
       onClick={[Function]}
       style={

@@ -5,6 +5,7 @@ exports[`Triggers should render Triggers Component 1`] = `
   className="container-0-2-1"
 >
   <Button
+    id="generate-receipts"
     loading={false}
     onClick={[Function]}
     style={

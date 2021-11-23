@@ -7,7 +7,114 @@ exports[`Dashboard should render Dashboard Component 1`] = `
   <Title
     level={3}
   >
-    July 2021
+    January 2020
   </Title>
+</div>
+`;
+
+exports[`Dashboard test get dashboard info 1`] = `
+<div
+  className="container-0-2-1"
+>
+  <h3
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    January 2020
+  </h3>
+  <h4
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    Total sum
+  </h4>
+  <h5
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    $
+    1
+  </h5>
+  <br />
+  <h4
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    Total debts
+  </h4>
+  <h5
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    $
+    1
+  </h5>
+  <br />
+  <h4
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    Filled
+  </h4>
+  <h5
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    1
+    /
+    1
+  </h5>
+  <br />
+  <h4
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    Paid
+  </h4>
+  <h5
+    className="ant-typography"
+    style={
+      Object {
+        "WebkitLineClamp": undefined,
+      }
+    }
+  >
+    1
+    /
+    1
+  </h5>
+  <br />
 </div>
 `;
